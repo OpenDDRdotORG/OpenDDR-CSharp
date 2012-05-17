@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{67A3A231-64F0-49F2-BD02-316995E7A737}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oddr</RootNamespace>
+    <AssemblyName>OpenDddr.Oddr</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\..\..\Downloads\log4net-1.2.11-bin-newkey\log4net-1.2.11\bin\net\3.5\release\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builders\Browsers\AndroidMobileBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\BlackBerryBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\ChromeBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\DefaultBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\DolfinBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\FennecBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\FirefoxBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\HintedResolutionBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\IEMobileBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\InternetExplorerBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\JasmineBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\KonquerorBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\LayoutEngineBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\NetFrontBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\NokiaBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\ObigoBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\OpenWaveBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\OperaBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\OperaMiniBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\PolarisBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\SafariBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\SafariMobileBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\SEMCBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\UPBrowserBuilder.cs" />
+    <Compile Include="Builders\Devices\AndroidDeviceBuilder.cs" />
+    <Compile Include="Builders\Devices\IDeviceBuilder.cs" />
+    <Compile Include="Builders\Devices\IOSDeviceBuilder.cs" />
+    <Compile Include="Builders\Devices\OrderedTokenDeviceBuilder.cs" />
+    <Compile Include="Builders\Devices\SimpleDeviceBuilder.cs" />
+    <Compile Include="Builders\Devices\SymbianDeviceBuilder.cs" />
+    <Compile Include="Builders\Devices\TwoStepDeviceBuilder.cs" />
+    <Compile Include="Builders\Devices\WinPhoneDeviceBuilder.cs" />
+    <Compile Include="Builders\IBuilder.cs" />
+    <Compile Include="Builders\OS\BlackBerryOSBuilder.cs" />
+    <Compile Include="Builders\OS\DefaultOSBuilder.cs" />
+    <Compile Include="Builders\OS\MozillaOSModelBuilder.cs" />
+    <Compile Include="Builders\OS\Mozilla\AndroidMozillaSubBuilder.cs" />
+    <Compile Include="Builders\OS\Mozilla\BadaMozillaSubBuilder.cs" />
+    <Compile Include="Builders\OS\Mozilla\BlackBerryMozillaSubBuilder.cs" />
+    <Compile Include="Builders\OS\Mozilla\BrewMozillaSubBuilder.cs" />
+    <Compile Include="Builders\OS\Mozilla\IOSMozillaSubBuilder.cs" />
+    <Compile Include="Builders\OS\Mozilla\LinuxMozillaSubBuilder.cs" />
+    <Compile Include="Builders\OS\Mozilla\MacOSXMozillaSubBuilder.cs" />
+    <Compile Include="Builders\OS\Mozilla\SymbianMozillaSubBuilder.cs" />
+    <Compile Include="Builders\OS\Mozilla\WebOSMozillaSubBuilder.cs" />
+    <Compile Include="Builders\OS\Mozilla\WinCEMozillaSubBuilder.cs" />
+    <Compile Include="Builders\OS\Mozilla\WinPhoneMozillaSubBuilder.cs" />
+    <Compile Include="Builders\OS\OperaOSModelBuilder.cs" />
+    <Compile Include="Caches\Cache.cs" />
+    <Compile Include="Caches\ICache.cs" />
+    <Compile Include="Documenthandlers\BrowserDatasourceParser.cs" />
+    <Compile Include="Documenthandlers\DeviceBuilderParser.cs" />
+    <Compile Include="Documenthandlers\DeviceDatasourceParser.cs" />
+    <Compile Include="Documenthandlers\OperatingSystemDatasourceParser.cs" />
+    <Compile Include="Documenthandlers\VocabularyParser.cs" />
+    <Compile Include="Identificators\BrowserIdentificator.cs" />
+    <Compile Include="Identificators\DeviceIdentificator.cs" />
+    <Compile Include="Identificators\IIdentificator.cs" />
+    <Compile Include="Identificators\OSIdentificator.cs" />
+    <Compile Include="Models\Browsers\Browser.cs" />
+    <Compile Include="Models\BufferedODDRHTTPEvidence.cs" />
+    <Compile Include="Models\BuiltObject.cs" />
+    <Compile Include="Models\Devices\Device.cs" />
+    <Compile Include="Models\ODDRHTTPEvidence.cs" />
+    <Compile Include="Models\ODDRPropertyName.cs" />
+    <Compile Include="Models\ODDRPropertyRef.cs" />
+    <Compile Include="Models\ODDRPropertyValue.cs" />
+    <Compile Include="Models\ODDRPropertyValues.cs" />
+    <Compile Include="Models\OS\OperatingSystem.cs" />
+    <Compile Include="Models\UserAgent.cs" />
+    <Compile Include="Models\UserAgentFactory.cs" />
+    <Compile Include="Models\Vocabularies\Vocabulary.cs" />
+    <Compile Include="Models\Vocabularies\VocabularyProperty.cs" />
+    <Compile Include="Models\Vocabularies\VocabularyVariable.cs" />
+    <Compile Include="ODDRService.cs" />
+    <Compile Include="ODDRVocabularyService.cs" />
+    <Compile Include="Vocabularies\VocabularyHolder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="oddr.properties" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DDR-Simple-API\DDR-Simple-API.csproj">
+      <Project>{F802E34F-10F1-4334-9099-3F1579DC4F06}</Project>
+      <Name>DDR-Simple-API</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -2,11 +2,11 @@ OpenDDR-CSharp
 ==============
 Dear OpenDDR user, 
 
-this is ALPHA version of C# porting of OpenDDR!
+this is the ALPHA version of C# porting of OpenDDR!
 
 We have implemented all features of OpenDDR Java version (except for Group Aspect Identification) but we still need to improve performance.
 
-Every yours contributions are welcomed.
+All contributions are welcome.
 Help OpenDDR grow up!
 
 

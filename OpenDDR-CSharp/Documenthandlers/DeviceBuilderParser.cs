@@ -164,7 +164,6 @@ namespace Oddr.Documenthandlers
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(this.GetType().FullName + " " + ex.Message);
                     throw new ArgumentException("Can not instantiate class: {0} described in device builder document", deviceBuilderClassMapper[bw.attributeClass]);
                 }
             }

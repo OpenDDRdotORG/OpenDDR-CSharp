@@ -123,7 +123,7 @@ namespace Oddr.Identificators
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(this.GetType().FullName + " " + ex.Message);
+                    //Console.WriteLine(this.GetType().FullName + " " + ex.Message);
                 }
             }
         }

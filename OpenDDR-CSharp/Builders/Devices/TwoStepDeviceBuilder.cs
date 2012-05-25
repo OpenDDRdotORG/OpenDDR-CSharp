@@ -65,7 +65,7 @@ namespace Oddr.Builders.Devices
                 }
                 else
                 {
-                    Console.WriteLine(this.GetType().FullName + " can't cast orderedRules' values in OrderedDictionary");
+                    //Console.WriteLine(this.GetType().FullName + " can't cast orderedRules' values in OrderedDictionary");
                 }
             }
         }
@@ -190,7 +190,7 @@ namespace Oddr.Builders.Devices
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(this.GetType().FullName + " " + "initProperties[0] " + initProperties[0] + " step1Token " + step1Token + " " + ex.Message);
+                    //Console.WriteLine(this.GetType().FullName + " " + "initProperties[0] " + initProperties[0] + " step1Token " + step1Token + " " + ex.Message);
                 }
             }
             try
@@ -200,7 +200,7 @@ namespace Oddr.Builders.Devices
             }
             catch (Exception ex)
             {
-                Console.WriteLine(this.GetType().FullName + " " + "step2token " + step2TokenString + " deviceID " + deviceID + " " + ex.Message);
+                //Console.WriteLine(this.GetType().FullName + " " + "step2token " + step2TokenString + " deviceID " + deviceID + " " + ex.Message);
             }
         }
 

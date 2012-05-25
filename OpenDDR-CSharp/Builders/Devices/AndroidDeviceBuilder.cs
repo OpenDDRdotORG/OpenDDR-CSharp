@@ -30,7 +30,7 @@ namespace Oddr.Builders.Devices
 {
     public class AndroidDeviceBuilder : OrderedTokenDeviceBuilder
     {
-        private const String BUILD_HASH_REGEXP = ".*Build/([^ \\)]*).*";
+        private const String BUILD_HASH_REGEXP = ".*Build/([^ \\)\\(]*).*";
         private Regex buildHashRegex = new Regex(BUILD_HASH_REGEXP);
         private Dictionary<String, Device> devices;
 
@@ -60,7 +60,7 @@ namespace Oddr.Builders.Devices
             }
             catch (Exception ex)
             {
-                Console.WriteLine(this.GetType().FullName + " " + initProperties[0] + " " + deviceID + " " + ex.Message);
+                //Console.WriteLine(this.GetType().FullName + " " + initProperties[0] + " " + deviceID + " " + ex.Message);
             }
         }
 

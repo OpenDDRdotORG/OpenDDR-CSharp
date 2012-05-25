@@ -143,7 +143,7 @@ namespace Oddr.Documenthandlers
                         //}
                         catch (ArgumentException ae)
                         {
-                            Console.WriteLine(this.GetType().FullName + " " + sp.key + " already present!!!");
+                            //Console.WriteLine(this.GetType().FullName + " " + sp.key + " already present!!!");
                         }
                     }
                 }

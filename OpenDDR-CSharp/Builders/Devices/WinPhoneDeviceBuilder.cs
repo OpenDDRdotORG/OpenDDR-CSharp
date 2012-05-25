@@ -62,7 +62,7 @@ namespace Oddr.Builders.Devices
             }
             catch (Exception ex)
             {
-                Console.WriteLine(this.GetType().FullName + " " + initProperties[0] + " " + deviceID + " " + ex.Message);
+                //Console.WriteLine(this.GetType().FullName + " " + initProperties[0] + " " + deviceID + " " + ex.Message);
             }
         }
 

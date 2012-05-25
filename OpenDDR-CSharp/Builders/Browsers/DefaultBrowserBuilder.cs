@@ -41,6 +41,7 @@ namespace Oddr.Builders.Browsers
             {
                 new OperaMiniBrowserBuilder(),
                 new SafariMobileBrowserBuilder(),
+                new SilkBrowserBuilder(),
                 new AndroidMobileBrowserBuilder(),
                 new NetFrontBrowserBuilder(),
                 new UPBrowserBuilder(),

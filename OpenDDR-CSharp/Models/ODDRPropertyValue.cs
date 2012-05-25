@@ -41,24 +41,17 @@ namespace Oddr.Models
         private readonly String type;
         private readonly IPropertyRef propertyRef;
 
-        public ODDRPropertyValue(String value, String type, IPropertyRef propertyRef) {
-            this.value = value;
-            try
-            {
-                this.value.Trim();
-
-            }
-            catch (NullReferenceException nre)
-            {
-            }
-
+        public ODDRPropertyValue(String value, String type, IPropertyRef propertyRef)
+        {
+            this.value = value == null ? value : value.Trim();
             this.type = type;
             this.propertyRef = propertyRef;
         }
 
         public bool Exists()
         {
-            if (value != null && value.Length > 0 && !"-".Equals(value)) {
+            if (value != null && value.Length > 0 && !"-".Equals(value))
+            {
                 return true;
             }
             return false;
@@ -121,7 +114,7 @@ namespace Oddr.Models
             {
                 try
                 {
-                    String[] splitted = value.Split(new char[] {','});
+                    String[] splitted = value.Split(new char[] { ',' });
                     for (int i = 0; i < splitted.Length; i++)
                     {
                         splitted[i] = splitted[i].Trim();

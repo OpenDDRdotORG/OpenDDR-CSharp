@@ -31,13 +31,14 @@ namespace Oddr.Models
     {
 
         public const String MOZILLA_AND_OPERA_PATTERN = "(.*?)((?:Mozilla)|(?:Opera))[/ ](\\d+\\.\\d+).*?\\(((?:.*?)(?:.*?\\(.*?\\))*(?:.*?))\\)(.*)";
+        private const String VERSION_PATTERN = ".*Version/(\\d+.\\d+).*";
         public const int INDEX_MOZILLA_PATTERN_GROUP_PRE = 1;
         public const int INDEX_MOZILLA_PATTERN_GROUP_INSIDE = 4;
         public const int INDEX_MOZILLA_PATTERN_GROUP_POST = 5;
         public const int INDEX_MOZILLA_PATTERN_GROUP_MOZ_VER = 3;
         public const int INDEX_OPERA_OR_MOZILLA = 2;
-        private readonly Regex mozillaPatternCompiled = null;
-        private readonly Regex versionPatternCompiled = null;
+        private readonly Regex mozillaPatternCompiled = new Regex(MOZILLA_AND_OPERA_PATTERN, RegexOptions.Compiled);
+        private readonly Regex versionPatternCompiled = new Regex(VERSION_PATTERN, RegexOptions.Compiled);
         public String completeUserAgent
         {
             private set;
@@ -114,17 +115,7 @@ namespace Oddr.Models
             }
             completeUserAgent = userAgent;
 
-            Match result = null;
-            try
-            {
-                result = mozillaPatternCompiled.Match(userAgent);
-
-            }
-            catch (Exception ex)
-            {
-                mozillaPatternCompiled = new Regex(MOZILLA_AND_OPERA_PATTERN);
-                result = mozillaPatternCompiled.Match(userAgent);
-            }
+            Match result = mozillaPatternCompiled.Match(userAgent);
 
             if (result.Success)
             {
@@ -142,18 +133,7 @@ namespace Oddr.Models
 
                     if (operaVersion.Equals("9.80") && patternElements[2] != null)
                     {
-                        Match result2 = null;
-
-                        try
-                        {
-                            result2 = versionPatternCompiled.Match(patternElements[2]);
-
-                        }
-                        catch (Exception ex)
-                        {
-                            versionPatternCompiled = new Regex(".*Version/(\\d+.\\d+).*");
-                            result2 = versionPatternCompiled.Match(patternElements[2]);
-                        }
+                        Match result2 = versionPatternCompiled.Match(patternElements[2]);
 
                         if (result2.Success)
                         {
@@ -234,7 +214,7 @@ namespace Oddr.Models
                             if (internetExplorerRegex.IsMatch(userAgent))
                             {
                                 containsMSIE = true;
-                                
+
                             }
                             else
                             {

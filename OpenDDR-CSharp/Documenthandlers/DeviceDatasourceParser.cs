@@ -205,7 +205,7 @@ namespace Oddr.Documenthandlers
                 }
                 catch (ArgumentException ae)
                 {
-                    Console.WriteLine(this.GetType().FullName + " " + PROPERTY_ID + " already exist");
+                    //Console.WriteLine(this.GetType().FullName + " " + PROPERTY_ID + " already exist in device " + device.id);
                 }
 
                 try
@@ -214,7 +214,7 @@ namespace Oddr.Documenthandlers
                 }
                 catch (ArgumentException ae)
                 {
-                    Console.WriteLine(this.GetType().FullName + " " + device.id + " already exist");
+                    //Console.WriteLine(this.GetType().FullName + " " + device.id + " already exist in device " + device.id);
                     devices.Remove(device.id);
                     devices.Add(device.id, device);
                 }
@@ -251,7 +251,7 @@ namespace Oddr.Documenthandlers
                         //}
                         catch (ArgumentException ae)
                         {
-                            Console.WriteLine(this.GetType().FullName + " " + sp.key + " already present!!!");
+                            //Console.WriteLine(this.GetType().FullName + " " + sp.key + " already present in device " + id);
                         }
                     }
                 }

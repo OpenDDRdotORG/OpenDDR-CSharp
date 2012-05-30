@@ -17,40 +17,49 @@ namespace OpenDDRTest
 
             Properties props = new Properties(oddrPropertiesPath);
 
-            Type stype = Type.GetType("Oddr.ODDRService, OpenDddr.Oddr");
+            Type stype = Type.GetType("Oddr.ODDRService, OpenDdr");
 
             IService openDDRService = ServiceFactory.newService(stype, props.GetProperty("oddr.vocabulary.device"), props);
 
-            IPropertyRef vendorRef = openDDRService.NewPropertyRef("vendor");
-            IPropertyRef modelRef = openDDRService.NewPropertyRef("model");
-            IPropertyRef displayWidthRef = openDDRService.NewPropertyRef("displayWidth");
-            IPropertyRef displayHeightRef = openDDRService.NewPropertyRef("displayHeight");
+            IPropertyName vendorDevicePropertyName = openDDRService.NewPropertyName("vendor", @"http://www.openddr.org/oddr-vocabulary");
+            IPropertyRef vendorDeviceRef = openDDRService.NewPropertyRef(vendorDevicePropertyName, "device");
 
-            IPropertyRef[] propertyRefs = new IPropertyRef[] { vendorRef, modelRef, displayWidthRef, displayHeightRef };
+            IPropertyName modelDevicePropertyName = openDDRService.NewPropertyName("model", @"http://www.openddr.org/oddr-vocabulary");
+            IPropertyRef modelDeviceRef = openDDRService.NewPropertyRef(modelDevicePropertyName, "device");
 
-            IEvidence e = new ODDRHTTPEvidence();
+            IPropertyName vendorBrowserPropertyName = openDDRService.NewPropertyName("vendor", @"http://www.openddr.org/oddr-vocabulary");
+            IPropertyRef vendorBrowserRef = openDDRService.NewPropertyRef(vendorBrowserPropertyName, "webBrowser");
+
+            IPropertyName modelBrowserPropertyName = openDDRService.NewPropertyName("model", @"http://www.openddr.org/oddr-vocabulary");
+            IPropertyRef modelBrowserRef = openDDRService.NewPropertyRef(modelBrowserPropertyName, "webBrowser");
+
+            IPropertyRef[] propertyRefs = new IPropertyRef[] { vendorDeviceRef, modelDeviceRef, vendorBrowserRef, modelBrowserRef };
+
+            IEvidence e = new BufferedODDRHTTPEvidence();
             e.Put("User-Agent", userAgent);
 
             IPropertyValues propertyValues = openDDRService.GetPropertyValues(e, propertyRefs);
-            if (propertyValues.GetValue(vendorRef).Exists())
+            if (propertyValues.GetValue(vendorDeviceRef).Exists())
             {
-                Console.WriteLine(propertyValues.GetValue(vendorRef).GetString());
+                Console.WriteLine(propertyValues.GetValue(vendorDeviceRef).GetString());
             }
 
-            if (propertyValues.GetValue(modelRef).Exists())
+            if (propertyValues.GetValue(modelDeviceRef).Exists())
             {
-                Console.WriteLine(propertyValues.GetValue(modelRef).GetString());
+                Console.WriteLine(propertyValues.GetValue(modelDeviceRef).GetString());
             }
 
-            if (propertyValues.GetValue(displayWidthRef).Exists())
+            if (propertyValues.GetValue(vendorBrowserRef).Exists())
             {
-                Console.WriteLine(propertyValues.GetValue(displayWidthRef).GetString());
+                Console.WriteLine(propertyValues.GetValue(vendorBrowserRef).GetString());
             }
 
-            if (propertyValues.GetValue(displayHeightRef).Exists())
+            if (propertyValues.GetValue(modelBrowserRef).Exists())
             {
-                Console.WriteLine(propertyValues.GetValue(displayHeightRef).GetString());
+                Console.WriteLine(propertyValues.GetValue(modelBrowserRef).GetString());
             }
+
+            Console.WriteLine(((BufferedODDRHTTPEvidence) e).deviceFound.Get("is_wireless_device"));
 
             Console.ReadKey();
         }

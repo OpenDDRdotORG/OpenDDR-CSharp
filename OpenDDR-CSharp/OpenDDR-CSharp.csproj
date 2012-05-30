@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Oddr</RootNamespace>
-    <AssemblyName>OpenDddr.Oddr</AssemblyName>
+    <AssemblyName>OpenDdr</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -53,9 +53,7 @@
     <StartupObject>
     </StartupObject>
   </PropertyGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="log4net">
       <HintPath>..\..\..\..\..\Downloads\log4net-1.2.11-bin-newkey\log4net-1.2.11\bin\net\3.5\release\log4net.dll</HintPath>
@@ -142,6 +140,7 @@
     <Compile Include="Models\Vocabularies\VocabularyVariable.cs" />
     <Compile Include="ODDRService.cs" />
     <Compile Include="ODDRVocabularyService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vocabularies\VocabularyHolder.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +161,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="oddr.properties" />
   </ItemGroup>
   <ItemGroup>

@@ -202,7 +202,7 @@ namespace Oddr.Models
             {
                 throw new ValueException(ValueException.NOT_KNOWN, type);
             }
-            if (type.Equals(TYPE_LONG) || type.Equals(TYPE_INT))
+            if (type.Equals(TYPE_LONG) || type.Equals(TYPE_INT) || type.Equals(TYPE_NON_NEGATIVE_INTEGER))
             {
                 try
                 {

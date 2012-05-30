@@ -46,9 +46,11 @@ namespace Oddr.Builders.Devices
         protected override void AfterOrderingCompleteInit(Dictionary<string, Device> devices)
         {
             this.devices = devices;
-            foreach (Object devIdObj in orderedRules.Values) {
-                String devId = (String) devIdObj;
-                if (!devices.ContainsKey(devId)) {
+            foreach (Object devIdObj in orderedRules.Values)
+            {
+                String devId = (String)devIdObj;
+                if (!devices.ContainsKey(devId))
+                {
                     throw new InvalidOperationException("unable to find device with id: " + devId + "in devices");
                 }
             }
@@ -106,6 +108,8 @@ namespace Oddr.Builders.Devices
 
         private Device ElaborateSymbianDeviceWithToken(UserAgent userAgent, String token)
         {
+            String originalToken = token;
+
             if (userAgent.mozillaPattern || userAgent.operaPattern)
             {
                 int subtract = 0;
@@ -136,7 +140,7 @@ namespace Oddr.Builders.Devices
                     currentRegex = new Regex(".*Series60.?(\\d+)\\.(\\d+).?" + currentToken + ".*");
                     if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))
                     {
-                        if (orderedRules.Contains(currentToken))
+                        if (orderedRules.Contains(originalToken))
                         {
                             String deviceId = (String)orderedRules[currentToken];
                             Device retDevice = null;
@@ -152,7 +156,7 @@ namespace Oddr.Builders.Devices
                     currentRegex = new Regex(".*" + currentToken);
                     if (userAgent.GetPatternElementsPre() != null && currentRegex.IsMatch(userAgent.GetPatternElementsPre()))
                     {
-                        if (orderedRules.Contains(currentToken))
+                        if (orderedRules.Contains(originalToken))
                         {
                             String deviceId = (String)orderedRules[currentToken];
                             Device retDevice = null;
@@ -167,7 +171,7 @@ namespace Oddr.Builders.Devices
 
                     if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))
                     {
-                        if (orderedRules.Contains(currentToken))
+                        if (orderedRules.Contains(originalToken))
                         {
                             String deviceId = (String)orderedRules[currentToken];
                             Device retDevice = null;
@@ -183,7 +187,7 @@ namespace Oddr.Builders.Devices
                     currentRegex = new Regex(".*" + currentToken + ".?;.*");
                     if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))
                     {
-                        if (orderedRules.Contains(currentToken))
+                        if (orderedRules.Contains(originalToken))
                         {
                             String deviceId = (String)orderedRules[currentToken];
                             Device retDevice = null;
@@ -208,7 +212,7 @@ namespace Oddr.Builders.Devices
 
                     if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))
                     {
-                        if (orderedRules.Contains(currentToken))
+                        if (orderedRules.Contains(originalToken))
                         {
                             String deviceId = (String)orderedRules[currentToken];
                             Device retDevice = null;
@@ -223,7 +227,7 @@ namespace Oddr.Builders.Devices
 
                     if (userAgent.GetPatternElementsPre() != null && currentRegex.IsMatch(userAgent.GetPatternElementsPre()))
                     {
-                        if (orderedRules.Contains(currentToken))
+                        if (orderedRules.Contains(originalToken))
                         {
                             String deviceId = (String)orderedRules[currentToken];
                             Device retDevice = null;
@@ -238,7 +242,7 @@ namespace Oddr.Builders.Devices
 
                     if (userAgent.GetPatternElementsPost() != null && currentRegex.IsMatch(userAgent.GetPatternElementsPost()))
                     {
-                        if (orderedRules.Contains(currentToken))
+                        if (orderedRules.Contains(originalToken))
                         {
                             String deviceId = (String)orderedRules[currentToken];
                             Device retDevice = null;
@@ -250,6 +254,49 @@ namespace Oddr.Builders.Devices
                             }
                         }
                     }
+                    subtract += 20;
+                }
+            }
+            else
+            {
+                String ua = Regex.Replace(userAgent.completeUserAgent, "SN[0-9]*", "");
+
+                int subtract = 0;
+                String currentToken = token;
+
+                String looseToken = Regex.Replace(token, "[ _/-]", ".?");
+                Regex looseRegex = new Regex(".*" + looseToken + ".*");
+
+                if (!looseRegex.IsMatch(userAgent.completeUserAgent))
+                {
+                    return null;
+                }
+
+                Regex currentRegex = null;
+
+                for (int i = 0; i <= 1; i++)
+                {
+                    if (i == 1)
+                    {
+                        currentToken = looseToken;
+                    }
+
+                    currentRegex = new Regex(".*" + currentToken + ".*");
+                    if (currentRegex.IsMatch(ua))
+                    {
+                        if (orderedRules.Contains(originalToken))
+                        {
+                            string deviceId = orderedRules[originalToken] as string;                            
+
+                            if (devices.ContainsKey(deviceId))
+                            {
+                                Device retDevice = (Device)devices[deviceId].Clone();
+                                retDevice.confidence = 100 - subtract;
+                                return retDevice;
+                            }
+                        }
+                    }
+
                     subtract += 20;
                 }
             }

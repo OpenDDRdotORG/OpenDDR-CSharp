@@ -344,7 +344,7 @@ namespace Oddr.Builders.Devices
                 {
                     if (betweenTokensLength <= 1)
                     {
-                        Regex betweenTokensRegex = new Regex(".*[ _/-].*");
+                        Regex betweenTokensRegex = new Regex("[ _/-]?");
                         if (!betweenTokensRegex.IsMatch(betweenTokens))
                         {
                             confidence -= 20;

@@ -34,3 +34,9 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+// This will cause log4net to look for a configuration file 
+// called [ThisApp].exe.config in the application base 
+// directory (i.e. the directory containing [ThisApp].exe) 
+// The config file will be watched for changes. 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]

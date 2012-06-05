@@ -104,7 +104,7 @@ namespace Oddr.Documenthandlers
                                                          //where prop.Attribute(ATTRIBUTE_PROPERTY_DATA_TYPE) != null
                                                          select new VocabularyProperty
                                                          {
-                                                             aspects = prop.Attribute(ATTRIBUTE_PROPERTY_ASPECTS).Value.Replace(" ", "").Split(','),
+                                                             aspects = prop.Attribute(ATTRIBUTE_PROPERTY_ASPECTS).Value.Replace(" ", "").Split(",".ToCharArray()),
                                                              defaultAspect = prop.Attribute(ATTRIBUTE_PROPERTY_DEFAULT_ASPECT).Value,
                                                              //expr = prop.Attribute(ATTRIBUTE_PROPERTY_EXPR).Value,
                                                              name = prop.Attribute(ATTRIBUTE_PROPERTY_NAME).Value,

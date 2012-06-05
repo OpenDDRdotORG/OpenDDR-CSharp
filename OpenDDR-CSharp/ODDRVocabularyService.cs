@@ -101,7 +101,7 @@ namespace Oddr
             }
             else
             {
-                String[] oddrVocabularyPaths = oddrVocabularyPath.Split(',');
+                String[] oddrVocabularyPaths = oddrVocabularyPath.Split(",".ToCharArray());
                 foreach (string p in oddrVocabularyPaths)
                 {
                     p.Trim();

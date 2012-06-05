@@ -114,7 +114,7 @@ namespace Oddr.Models
             {
                 try
                 {
-                    String[] splitted = value.Split(new char[] { ',' });
+                    String[] splitted = value.Split(",".ToCharArray());
                     for (int i = 0; i < splitted.Length; i++)
                     {
                         splitted[i] = splitted[i].Trim();

@@ -142,7 +142,7 @@ namespace Oddr.Builders.Devices
                     {
                         if (orderedRules.Contains(originalToken))
                         {
-                            String deviceId = (String)orderedRules[currentToken];
+                            String deviceId = (String)orderedRules[originalToken];
                             Device retDevice = null;
                             if (devices.TryGetValue(deviceId, out retDevice))
                             {
@@ -158,7 +158,7 @@ namespace Oddr.Builders.Devices
                     {
                         if (orderedRules.Contains(originalToken))
                         {
-                            String deviceId = (String)orderedRules[currentToken];
+                            String deviceId = (String)orderedRules[originalToken];
                             Device retDevice = null;
                             if (devices.TryGetValue(deviceId, out retDevice))
                             {
@@ -173,7 +173,7 @@ namespace Oddr.Builders.Devices
                     {
                         if (orderedRules.Contains(originalToken))
                         {
-                            String deviceId = (String)orderedRules[currentToken];
+                            String deviceId = (String)orderedRules[originalToken];
                             Device retDevice = null;
                             if (devices.TryGetValue(deviceId, out retDevice))
                             {
@@ -189,7 +189,7 @@ namespace Oddr.Builders.Devices
                     {
                         if (orderedRules.Contains(originalToken))
                         {
-                            String deviceId = (String)orderedRules[currentToken];
+                            String deviceId = (String)orderedRules[originalToken];
                             Device retDevice = null;
                             if (devices.TryGetValue(deviceId, out retDevice))
                             {
@@ -214,7 +214,7 @@ namespace Oddr.Builders.Devices
                     {
                         if (orderedRules.Contains(originalToken))
                         {
-                            String deviceId = (String)orderedRules[currentToken];
+                            String deviceId = (String)orderedRules[originalToken];
                             Device retDevice = null;
                             if (devices.TryGetValue(deviceId, out retDevice))
                             {

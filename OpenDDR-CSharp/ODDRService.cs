@@ -520,7 +520,7 @@ namespace Oddr
 
             if (oddrUaDeviceBuilderPatchPaths != null && oddrUaDeviceBuilderPatchPaths.Trim().Length != 0)
             {
-                oddrUaDeviceBuilderPatchPathArray = oddrUaDeviceBuilderPatchPaths.Split(',');
+                oddrUaDeviceBuilderPatchPathArray = oddrUaDeviceBuilderPatchPaths.Split(",".ToCharArray());
 
             }
             else
@@ -532,7 +532,7 @@ namespace Oddr
 
             if (oddrUaDeviceDatasourcePatchPaths != null && oddrUaDeviceDatasourcePatchPaths.Trim().Length != 0)
             {
-                ooddrUaDeviceDatasourcePatchPathArray = oddrUaDeviceDatasourcePatchPaths.Split(',');
+                ooddrUaDeviceDatasourcePatchPathArray = oddrUaDeviceDatasourcePatchPaths.Split(",".ToCharArray());
 
             }
             else
@@ -628,7 +628,7 @@ namespace Oddr
 
             deviceDatasourceParser.patching = true;
 
-            if (oddrUaDeviceDatasourcePatchStreams != null)
+            if (oddrUaDeviceDatasourcePatchStreams != null && oddrUaDeviceDatasourcePatchStreams.Length != 0)
             {
                 for (int i = 0; i < oddrUaDeviceDatasourcePatchStreams.Length; i++)
                 {

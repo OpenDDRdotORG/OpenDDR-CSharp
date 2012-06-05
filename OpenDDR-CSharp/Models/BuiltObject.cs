@@ -66,12 +66,15 @@ namespace Oddr.Models
         }
 
         public void PutProperty(String name, String value) {
-            this.properties.Add(name, value);
+            this.properties[name] = value;
         }
 
         public void PutPropertiesMap(Dictionary<String, String> properties)
         {
-            this.properties = this.properties.Concat(properties).ToDictionary(x => x.Key, x => x.Value);
+            foreach (KeyValuePair<string, string> kvp in properties)
+            {
+                this.properties[kvp.Key] = kvp.Value;
+            }
         }
     }
 }

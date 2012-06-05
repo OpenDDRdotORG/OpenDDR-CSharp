@@ -190,7 +190,7 @@ namespace Oddr.Documenthandlers
                 {
                     if (patching)
                     {
-                        existDevice.PutPropertiesMap(existDevice.properties.Concat(device.properties).ToDictionary(x => x.Key, x => x.Value));
+                        existDevice.PutPropertiesMap(device.properties);
                         continue;
                     }
                     else

@@ -360,10 +360,12 @@ namespace Oddr.Builders.Devices
 
                     if (orderedRules.Contains(step1Token))
                     {
-                        Dictionary<string, string> d = (Dictionary<String, String>)orderedRules[step1Token];
+                        OrderedDictionary d = (OrderedDictionary)orderedRules[step1Token];
                         String deviceId = null;
-                        if (d.TryGetValue(originalToken, out deviceId))
+
+                        if (d.Contains(originalToken))
                         {
+                            deviceId = (string)d[originalToken];
                             Device retDevice = null;
                             if (devices.TryGetValue(deviceId, out retDevice))
                             {

@@ -57,7 +57,7 @@ namespace Oddr.Builders.Browsers
                     if (totalVersion.Length > 0)
                     {
                         identified.SetVersion(totalVersion);
-                        String[] version = totalVersion.Split(new string[] { "\\." }, StringSplitOptions.None);
+                        String[] version = totalVersion.Split(".".ToCharArray());
 
                         if (version.Length > 0)
                         {

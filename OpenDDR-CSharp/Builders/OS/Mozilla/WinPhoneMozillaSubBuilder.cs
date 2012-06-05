@@ -63,7 +63,7 @@ namespace Oddr.Builders.OS.Mozilla
                 isInPostMoz = true;
             }
 
-            String[] splittedTokens = toSplit.Split(';');
+            String[] splittedTokens = toSplit.Split(";".ToCharArray());
             foreach (String tokenElement in splittedTokens)
             {
                 if (versionRegex.IsMatch(tokenElement))

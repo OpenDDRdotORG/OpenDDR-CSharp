@@ -62,7 +62,7 @@ namespace Oddr.Builders.Browsers
             }
 
             identified.SetVersion(userAgent.operaVersion);
-            String[] version = userAgent.operaVersion.Split(new string[] { "\\." }, StringSplitOptions.None);
+            String[] version = userAgent.operaVersion.Split(".".ToCharArray());
 
             if (version.Length > 0)
             {
@@ -95,7 +95,7 @@ namespace Oddr.Builders.Browsers
                 }
             }
 
-            String[] inside = userAgent.GetPatternElementsInside().Split(new char[] { ';' });
+            String[] inside = userAgent.GetPatternElementsInside().Split(";".ToCharArray());
             foreach (String token in inside)
             {
                 String element = token.Trim();

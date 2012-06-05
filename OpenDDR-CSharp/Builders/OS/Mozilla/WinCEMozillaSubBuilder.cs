@@ -58,7 +58,7 @@ namespace Oddr.Builders.OS.Mozilla
             model.confidence = 40;
 
             string patternElementsInside = userAgent.GetPatternElementsInside();
-            String[] splittedTokens = patternElementsInside.Split(';');
+            String[] splittedTokens = patternElementsInside.Split(";".ToCharArray());
             foreach (String tokenElement in splittedTokens)
             {
                 if (versionRegex.IsMatch(tokenElement))
@@ -102,7 +102,7 @@ namespace Oddr.Builders.OS.Mozilla
                     {
                         version = "0.0.0.0";
                     }
-                    String[] subVersion = version.Split(new string[] { "\\." }, StringSplitOptions.None);
+                    String[] subVersion = version.Split(".".ToCharArray());
                     int count = 0;
                     GroupCollection groups = versionMsieMatcher.Groups;
                     for (int idx = 1; idx <= groups.Count; idx++)

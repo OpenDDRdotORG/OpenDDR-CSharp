@@ -49,7 +49,7 @@ namespace Oddr.Builders.OS.Mozilla
             model.confidence = 40;
 
             string patternElementInside = userAgent.GetPatternElementsInside();
-            String[] splittedTokens = patternElementInside.Split(';');
+            String[] splittedTokens = patternElementInside.Split(";".ToCharArray());
             foreach (String tokenElement in splittedTokens)
             {
                 if (versionRegex.IsMatch(tokenElement))

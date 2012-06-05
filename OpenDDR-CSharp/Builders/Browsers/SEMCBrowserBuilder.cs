@@ -61,7 +61,7 @@ namespace Oddr.Builders.Browsers
             identified.SetModel("Mobile Browser");
             identified.SetVersion(version);
 
-            String[] versionEl = version.Split(new string[] { "\\." }, StringSplitOptions.None);
+            String[] versionEl = version.Split(".".ToCharArray());
 
             if (versionEl.Length > 0)
             {

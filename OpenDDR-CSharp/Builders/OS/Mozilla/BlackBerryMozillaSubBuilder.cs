@@ -45,7 +45,7 @@ namespace Oddr.Builders.OS.Mozilla
 
             String rebuilded = userAgent.GetPatternElementsInside() + ";" + userAgent.GetPatternElementsPost();
 
-            String[] splittedTokens = rebuilded.Split(';');
+            String[] splittedTokens = rebuilded.Split(";".ToCharArray());
             foreach (String tokenElement in splittedTokens)
             {
                 if (versionRegex.IsMatch(tokenElement))

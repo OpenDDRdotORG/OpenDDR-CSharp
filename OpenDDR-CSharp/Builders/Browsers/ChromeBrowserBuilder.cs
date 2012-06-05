@@ -59,7 +59,7 @@ namespace Oddr.Builders.Browsers
                 {
                     string versionFullString = groups[1].Value;
                     identified.SetVersion(versionFullString);
-                    String[] version = versionFullString.Split(new string[] { "\\." }, StringSplitOptions.None);
+                    String[] version = versionFullString.Split(".".ToCharArray());
 
                     if (version.Length > 0)
                     {

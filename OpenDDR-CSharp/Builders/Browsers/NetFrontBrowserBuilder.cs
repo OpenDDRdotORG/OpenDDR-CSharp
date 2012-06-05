@@ -63,7 +63,7 @@ namespace Oddr.Builders.Browsers
             identified.SetVendor("Access");
             identified.SetModel("NetFront");
             identified.SetVersion(version);
-            String[] versionEl = version.Split(new string[] { "\\." }, StringSplitOptions.None);
+            String[] versionEl = version.Split(".".ToCharArray());
 
             if (versionEl.Length > 0)
             {

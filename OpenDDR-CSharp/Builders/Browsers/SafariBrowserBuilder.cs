@@ -52,7 +52,7 @@ namespace Oddr.Builders.Browsers
                 Match safariMatcher = safariVersionRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = safariMatcher.Groups;
 
-                if (groups[1] != null) {
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0) {
                     identified.SetVersion(groups[1].Value);
 
                     string versionFullString = groups[1].Value;

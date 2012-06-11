@@ -50,7 +50,7 @@ namespace Oddr.Builders.Browsers
             {
                 Match blackberryBrowserMatcher = blackberryVersionRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = blackberryBrowserMatcher.Groups;
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     String totalVersion = groups[1].Value;
 
@@ -103,7 +103,7 @@ namespace Oddr.Builders.Browsers
                 Match safariMatcher = safariVersionRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = safariMatcher.Groups;
 
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     identified.SetReferenceBrowser("Safari");
                     identified.SetReferenceBrowserVersion(groups[1].Value);

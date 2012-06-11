@@ -69,7 +69,7 @@ namespace Oddr.Builders.Browsers
                 Match versionMatcher = versionRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = versionMatcher.Groups;
 
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     identified.SetVersion(groups[1].Value);
 
@@ -115,7 +115,7 @@ namespace Oddr.Builders.Browsers
                 Match msieMatcher = msieVersionRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = msieMatcher.Groups;
 
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     identified.SetReferenceBrowser("MSIE");
                     identified.SetReferenceBrowserVersion(groups[1].Value);
@@ -128,7 +128,7 @@ namespace Oddr.Builders.Browsers
                 Match msieMobileMatcher = msieMobileVersionRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = msieMobileMatcher.Groups;
 
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     identified.SetLayoutEngine("MSIEMobile");
                     identified.SetLayoutEngineVersion(groups[1].Value);

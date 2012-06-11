@@ -52,23 +52,23 @@ namespace Oddr.Builders.Browsers
             identified.SetVendor("Opera");
             identified.SetModel("Opera Mini");
 
-            if (groups[1] != null)
+            if (groups[1] != null && groups[1].Value.Trim().Length > 0)
             {
                 identified.SetVersion(groups[1].Value);
             }
-            if (groups[2] != null)
+            if (groups[2] != null && groups[2].Value.Trim().Length > 0)
             {
                 identified.majorRevision = groups[2].Value;
             }
-            if (groups[3] != null)
+            if (groups[3] != null && groups[3].Value.Trim().Length > 0)
             {
                 identified.minorRevision = groups[3].Value;
             }
-            if (groups[4] != null)
+            if (groups[4] != null && groups[4].Value.Trim().Length > 0)
             {
                 identified.microRevision = groups[4].Value;
             }
-            if (groups[5] != null)
+            if (groups[5] != null && groups[5].Value.Trim().Length > 0)
             {
                 identified.nanoRevision = groups[5].Value;
             }
@@ -85,7 +85,7 @@ namespace Oddr.Builders.Browsers
                 Match buildMatcher = buildRegex.Match(userAgent.completeUserAgent);
                 GroupCollection buildGroups = buildMatcher.Groups;
 
-                if (buildGroups[1] != null)
+                if (buildGroups[1] != null && buildGroups[1].Value.Trim().Length > 0)
                 {
                     identified.SetBuild(buildGroups[1].Value);
                     confidence += 10;

@@ -59,7 +59,7 @@ namespace Oddr.Builders.Browsers
                 Match firefoxMatcher = firefoxVersionRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = firefoxMatcher.Groups;
 
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     identified.SetVersion(groups[1].Value);
 

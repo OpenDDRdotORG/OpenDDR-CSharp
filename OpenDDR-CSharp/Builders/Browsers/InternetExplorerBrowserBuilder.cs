@@ -57,7 +57,7 @@ namespace Oddr.Builders.Browsers
                 Match msieMatcher = msieVersionRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = msieMatcher.Groups;
 
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     identified.SetVersion(groups[1].Value);
 

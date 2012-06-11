@@ -76,19 +76,19 @@ namespace Oddr.Builders.OS.Mozilla
                         model.confidence = 85;
                     }
 
-                    if (groups[1] != null)
+                    if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                     {
                         model.SetDescription(groups[1].Value);
                     }
-                    if (groups[2] != null)
+                    if (groups[2] != null && groups[2].Value.Trim().Length > 0)
                     {
                         model.majorRevision = groups[2].Value;
                     }
-                    if (groups[3] != null)
+                    if (groups[3] != null && groups[3].Value.Trim().Length > 0)
                     {
                         model.minorRevision = groups[3].Value;
                     }
-                    if (groups[4] != null)
+                    if (groups[4] != null && groups[4].Value.Trim().Length > 0)
                     {
                         model.microRevision = groups[4].Value;
                     }
@@ -107,7 +107,7 @@ namespace Oddr.Builders.OS.Mozilla
                     GroupCollection groups = versionMsieMatcher.Groups;
                     for (int idx = 1; idx <= groups.Count; idx++)
                     {
-                        if ((idx >= 1) && (idx <= 4) && groups[idx] != null)
+                        if ((idx >= 1) && (idx <= 4) && groups[idx] != null && groups[idx].Value.Trim().Length > 0)
                         {
                             subVersion[idx - 1] = groups[idx].Value;
                             count++;
@@ -160,7 +160,7 @@ namespace Oddr.Builders.OS.Mozilla
                 {
                     model.majorRevision = "6";
 
-                    if (groups[3].Equals("7"))
+                    if (groups[3].Value.Equals("7"))
                     {
                         model.minorRevision = "1";
                     }

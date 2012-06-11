@@ -58,19 +58,19 @@ namespace Oddr.Builders.OS.Mozilla
 
                     model.confidence = 90;
 
-                    if (groups[1] != null)
+                    if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                     {
                         model.SetVersion(groups[1].Value);
                     }
-                    if (groups[2] != null)
+                    if (groups[2] != null && groups[2].Value.Trim().Length > 0)
                     {
                         model.majorRevision = groups[2].Value;
                     }
-                    if (groups[3] != null)
+                    if (groups[3] != null && groups[3].Value.Trim().Length > 0)
                     {
                         model.minorRevision = groups[3].Value;
                     }
-                    if (groups[4] != null)
+                    if (groups[4] != null && groups[4].Value.Trim().Length > 0)
                     {
                         model.microRevision = groups[4].Value;
                     }

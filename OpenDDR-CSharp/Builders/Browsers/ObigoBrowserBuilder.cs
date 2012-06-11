@@ -66,7 +66,7 @@ namespace Oddr.Builders.Browsers
                 Match versionMatcher = versionRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = versionMatcher.Groups;
 
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     version = groups[1].Value;
                 }
@@ -84,7 +84,7 @@ namespace Oddr.Builders.Browsers
                     Match versionMatcher2 = versionRegex2.Match(userAgent.completeUserAgent);
                     GroupCollection groups = versionMatcher2.Groups;
 
-                    if (groups[1] != null)
+                    if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                     {
                         version = groups[1].Value;
                     }
@@ -103,7 +103,7 @@ namespace Oddr.Builders.Browsers
                     Match versionMatcher3 = versionRegex3.Match(userAgent.completeUserAgent);
                     GroupCollection groups = versionMatcher3.Groups;
 
-                    if (groups[1] != null)
+                    if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                     {
                         version = groups[1].Value;
                     }
@@ -122,7 +122,7 @@ namespace Oddr.Builders.Browsers
                     Match versionMatcher4 = versionRegex4.Match(userAgent.completeUserAgent);
                     GroupCollection groups = versionMatcher4.Groups;
 
-                    if (groups[1] != null)
+                    if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                     {
                         version = groups[1].Value;
                     }
@@ -141,7 +141,7 @@ namespace Oddr.Builders.Browsers
                     Match versionMatcher5 = versionRegex5.Match(userAgent.completeUserAgent);
                     GroupCollection groups = versionMatcher5.Groups;
 
-                    if (groups[1] != null)
+                    if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                     {
                         version = groups[1].Value;
                         identified.SetModel("Teleca-Obigo");

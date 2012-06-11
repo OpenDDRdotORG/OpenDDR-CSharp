@@ -53,41 +53,41 @@ namespace Oddr.Builders.OS.Mozilla
                     Match versionMatcher = versionRegex.Match(tokenElement);
                     GroupCollection groups = versionMatcher.Groups;
 
-                    if (groups[11] != null)
+                    if (groups[11].Value != null && groups[11].Value.Trim().Length > 0)
                     {
                         model.SetVendor("Research In Motion");
                         model.SetModel("RIM Tablet OS");
                         model.majorRevision = "1";
                         model.confidence = 50;
 
-                        if (groups[11] != null)
+                        if (groups[11].Value != null && groups[11].Value.Trim().Length > 0)
                         {
                             model.SetVersion(groups[11].Value);
 
                         }
 
-                        if (groups[12] != null)
+                        if (groups[12].Value != null && groups[12].Value.Trim().Length > 0)
                         {
                             model.majorRevision = groups[12].Value;
                             model.confidence = 60;
 
                         }
 
-                        if (groups[13] != null)
+                        if (groups[13].Value != null && groups[13].Value.Trim().Length > 0)
                         {
                             model.minorRevision = groups[13].Value;
                             model.confidence = 70;
 
                         }
 
-                        if (groups[14] != null)
+                        if (groups[14].Value != null && groups[14].Value.Trim().Length > 0)
                         {
                             model.microRevision = groups[14].Value;
                             model.confidence = 80;
 
                         }
 
-                        if (groups[15] != null)
+                        if (groups[15].Value != null && groups[15].Value.Trim().Length > 0)
                         {
                             model.nanoRevision = groups[15].Value;
                             model.confidence = 90;
@@ -96,16 +96,16 @@ namespace Oddr.Builders.OS.Mozilla
                         return model;
 
                     }
-                    else if (groups[1] != null || groups[6] != null)
+                    else if ((groups[1] != null && groups[1].Value.Trim().Length > 0) || (groups[6] != null && groups[6].Value.Trim().Length > 0))
                     {
                         model.SetVendor("Research In Motion");
                         model.SetModel("Black Berry OS");
                         model.majorRevision = "1";
                         model.confidence = 40;
 
-                        if (groups[1] != null)
+                        if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                         {
-                            if (groups[6] != null)
+                            if (groups[6] != null && groups[6].Value.Trim().Length > 0)
                             {
                                 model.confidence = 100;
 
@@ -116,57 +116,57 @@ namespace Oddr.Builders.OS.Mozilla
                             }
 
                         }
-                        else if (groups[6] != null)
+                        else if (groups[6] != null && groups[6].Value.Trim().Length > 0)
                         {
                             model.confidence = 90;
                         }
 
-                        if (groups[1] != null)
+                        if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                         {
                             model.SetVersion(groups[1].Value);
 
                         }
-                        else if (groups[6] != null)
+                        else if (groups[6] != null && groups[6].Value.Trim().Length > 0)
                         {
                             model.SetVersion(groups[6].Value);
                         }
 
-                        if (groups[2] != null)
+                        if (groups[2] != null && groups[2].Value.Trim().Length > 0)
                         {
                             model.majorRevision = groups[2].Value;
 
                         }
-                        else if (groups[7] != null)
+                        else if (groups[7] != null && groups[7].Value.Trim().Length > 0)
                         {
                             model.majorRevision = groups[7].Value;
                         }
 
-                        if (groups[3] != null)
+                        if (groups[3] != null && groups[3].Value.Trim().Length > 0)
                         {
                             model.minorRevision = groups[3].Value;
 
                         }
-                        else if (groups[8] != null)
+                        else if (groups[8] != null && groups[8].Value.Trim().Length > 0)
                         {
                             model.minorRevision = groups[8].Value;
                         }
 
-                        if (groups[4] != null)
+                        if (groups[4] != null && groups[4].Value.Trim().Length > 0)
                         {
                             model.microRevision = groups[4].Value;
 
                         }
-                        else if (groups[9] != null)
+                        else if (groups[9] != null && groups[9].Value.Trim().Length > 0)
                         {
                             model.microRevision = groups[9].Value;
                         }
 
-                        if (groups[5] != null)
+                        if (groups[5] != null && groups[5].Value.Trim().Length > 0)
                         {
                             model.nanoRevision = groups[5].Value;
 
                         }
-                        else if (groups[10] != null)
+                        else if (groups[10] != null && groups[10].Value.Trim().Length > 0)
                         {
                             model.nanoRevision = groups[10].Value;
                         }

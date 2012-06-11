@@ -105,7 +105,7 @@ namespace Oddr.Builders.Browsers
                     Match miniMatcher = operaMiniVersionRegex.Match(element);
                     GroupCollection groups = miniMatcher.Groups;
 
-                    if (groups[1] != null)
+                    if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                     {
                         identified.SetReferenceBrowser("Opera Mobi");
                         identified.SetReferenceBrowserVersion(groups[1].Value);

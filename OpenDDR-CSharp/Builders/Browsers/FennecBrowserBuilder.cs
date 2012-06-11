@@ -55,7 +55,7 @@ namespace Oddr.Builders.Browsers
             {
                 Match fennecMatcher = fennecVersionRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = fennecMatcher.Groups;
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     identified.SetVersion(groups[1].Value);
 
@@ -111,7 +111,7 @@ namespace Oddr.Builders.Browsers
                 Match firefoxMatcher = firefoxVersionRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = firefoxMatcher.Groups;
 
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     identified.SetReferenceBrowser("Firefox");
                     identified.SetReferenceBrowserVersion(groups[1].Value);

@@ -40,7 +40,7 @@ namespace Oddr.Builders.Browsers
 
             if (silkMatcher.Success)
             {
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     identified.SetVersion(groups[1].Value);
                     string versionFullString = groups[1].Value;
@@ -104,7 +104,7 @@ namespace Oddr.Builders.Browsers
 
                 if (androidMatcher.Success)
                 {
-                    if (androidGroups[1] != null)
+                    if (androidGroups[1] != null && androidGroups[1].Value.Trim().Length > 0)
                     {
                         identified.SetReferenceBrowserVersion(androidGroups[1].Value);
                         confidence += 5;
@@ -120,7 +120,7 @@ namespace Oddr.Builders.Browsers
 
                 if (safariMatcher.Success)
                 {
-                    if (safariGroups[1] != null)
+                    if (safariGroups[1] != null && safariGroups[1].Value.Trim().Length > 0)
                     {
                         identified.SetReferenceBrowserVersion(safariGroups[1].Value);
                         confidence += 5;

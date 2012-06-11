@@ -53,11 +53,11 @@ namespace Oddr.Builders.OS.Mozilla
                 Match descriptionMatcher = descriptionRegex.Match(userAgent.GetPatternElementsInside());
                 GroupCollection groups = descriptionMatcher.Groups;
 
-                if (groups[1] != null)
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
                 {
                     confidence += 10;
                 }
-                if (groups[2] != null)
+                if (groups[2] != null && groups[2].Value.Trim().Length > 0)
                 {
                     model.SetDescription(groups[2].Value);
                     confidence += 10;

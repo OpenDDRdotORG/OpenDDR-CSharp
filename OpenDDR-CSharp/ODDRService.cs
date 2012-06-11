@@ -740,7 +740,7 @@ namespace Oddr
                 logger.Warn("", ex);
             }
 
-            if (oddrUaDeviceBuilderPatchStreams != null)
+            if (oddrUaDeviceBuilderPatchStreams != null && oddrUaDeviceBuilderPatchStreams.Length != 0)
             {
                 for (int i = 0; i < oddrUaDeviceBuilderPatchStreams.Length; i++)
                 {

@@ -75,6 +75,7 @@ namespace Oddr.Documenthandlers
             deviceBuilderClassMapper.Add("org.openddr.simpleapi.oddr.builder.device.SymbianDeviceBuilder", "Oddr.Builders.Devices.SymbianDeviceBuilder");
             deviceBuilderClassMapper.Add("org.openddr.simpleapi.oddr.builder.device.WinPhoneDeviceBuilder", "Oddr.Builders.Devices.WinPhoneDeviceBuilder");
             deviceBuilderClassMapper.Add("org.openddr.simpleapi.oddr.builder.device.IOSDeviceBuilder", "Oddr.Builders.Devices.IOSDeviceBuilder");
+            deviceBuilderClassMapper.Add("org.openddr.simpleapi.oddr.builder.device.SimpleDeviceBuilder", "Oddr.Builders.Devices.SimpleDeviceBuilder");
             deviceBuilderClassMapper.Add("org.openddr.simpleapi.oddr.builder.device.TwoStepDeviceBuilder", "Oddr.Builders.Devices.TwoStepDeviceBuilder");
         }
 

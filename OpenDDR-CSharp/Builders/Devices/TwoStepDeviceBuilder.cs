@@ -167,9 +167,9 @@ namespace Oddr.Builders.Devices
             String step1TokenString = initProperties[0];
             String step2TokenString = initProperties[1];
 
-            //Regex step1TokenStringRegex = new Regex(".*" + step1TokenString + ".*");
-            //if (step1TokenStringRegex.IsMatch(step2TokenString))
-            if (step2TokenString.Contains(step1TokenString))
+            Regex step1TokenStringRegex = new Regex(".*" + step1TokenString + ".*");
+            if (step1TokenStringRegex.IsMatch(step2TokenString))
+            //if (step2TokenString.Contains(step1TokenString))
             {
                 step2TokenString = Regex.Replace(step2TokenString, step1TokenString + "[^a-zA-Z0-9]?", "");
             }

@@ -45,7 +45,7 @@ namespace Oddr.Builders.Devices
         {
             foreach (String token in initProperties)
             {
-                simpleTokenMap.Add(token, deviceID);
+                simpleTokenMap[token] = deviceID; // override duplicate
             }
         }
 

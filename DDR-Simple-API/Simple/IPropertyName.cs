@@ -26,10 +26,21 @@ using System.Text;
 
 namespace W3c.Ddr.Simple
 {
+    /// <summary>
+    /// The name of a Property together with its namespace.
+    /// </summary>
     public interface IPropertyName
     {
+        /// <summary>
+        /// Get Property Name
+        /// </summary>
+        /// <returns>Return the property name</returns>
         String LocalPropertyName();
 
+        /// <summary>
+        /// Get Namespace
+        /// </summary>
+        /// <returns>Return the namespace of the property</returns>
         String Namespace();
     }
 }

@@ -26,12 +26,24 @@ using System.Text;
 
 namespace W3c.Ddr.Exceptions
 {
+    /// <summary>
+    /// This is a subclass of DDRException and is thrown when an error is detected during an attempt to retrieve the value of a Property using one of the value accessor methods of the PropertyValue class. The exception code indicates the nature of the error.
+    /// </summary>
     public class ValueException : DDRException
     {
+        /// <summary>
+        /// The value represented by the PropertyValue is incompatible with the return type of the method used to retrieve it.
+        /// </summary>
         public static int INCOMPATIBLE_TYPES = 600;
 
+        /// <summary>
+        /// The property value is unknown.
+        /// </summary>
         public static int NOT_KNOWN = 900;
 
+        /// <summary>
+        /// The implementation is aware of multiple values for this Property.
+        /// </summary>
         public static int MULTIPLE_VALUES = 10000;
 
         public ValueException()

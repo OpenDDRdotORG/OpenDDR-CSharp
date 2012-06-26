@@ -26,15 +26,37 @@ using System.Text;
 
 namespace W3c.Ddr.Simple
 {
+    /// <summary>
+    /// The name of a Property together with its Aspect together with the namespace they are in.
+    /// </summary>
     public interface IPropertyRef
     {
         //public const String NULL_ASPECT = "__NULL";
+        /// <summary>
+        /// Null Aspect
+        /// </summary>
+        /// <remarks>
+        /// This value is used to support Vocabularies that do not distinguish Aspects.
+        /// </remarks>
+        /// <returns>Return the Null aspect string</returns>
         String NullAspect();
 
+        /// <summary>
+        /// Get Property Name
+        /// </summary>
+        /// <returns>Return the property name</returns>
         String LocalPropertyName();
 
+        /// <summary>
+        /// Get Aspect Name
+        /// </summary>
+        /// <returns>Return the aspect of the property</returns>
         String AspectName();
 
+        /// <summary>
+        /// Get Namespace
+        /// </summary>
+        /// <returns>Return the namespace of the property</returns>
         String Namespace();
     }
 }

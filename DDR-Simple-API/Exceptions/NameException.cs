@@ -26,12 +26,25 @@ using System.Text;
 
 namespace W3c.Ddr.Exceptions
 {
+    /// <summary>
+    /// This is a subclass of DDRException and is thrown when it is detected that the name of a Property or Aspect or vocabulary IRI is in error. The exception code, when set, indicates the nature of the error.
+    /// A name of a Property or Aspect or a vocabulary IRI are in error when they are not syntactically valid or are not supported by the implementation.
+    /// </summary>
     public class NameException : DDRException
     {
+        /// <summary>
+        /// The name of a Property is in error
+        /// </summary>
         public static int PROPERTY_NOT_RECOGNIZED = 100;
 
+        /// <summary>
+        /// The name of an Aspect is in error
+        /// </summary>
         public static int VOCABULARY_NOT_RECOGNIZED = 200;
 
+        /// <summary>
+        /// A vocabulary IRI is in error
+        /// </summary>
         public static int ASPECT_NOT_RECOGNIZED = 800;
 
         public NameException()

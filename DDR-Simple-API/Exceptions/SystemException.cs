@@ -26,10 +26,19 @@ using System.Text;
 
 namespace W3c.Ddr.Exceptions
 {
+    /// <summary>
+    /// This exception, a subclass of System.Exception, Is thrown by DDR Simple API implementations when they encounter unrecoverable errors.
+    /// </summary>
     public class SystemException : Exception
     {
+        /// <summary>
+        /// A method has been passed an illegal or inappropriate argument - a null argument where it is not allowed, for example.
+        /// </summary>
         public static int ILLEGAL_ARGUMENT = 400;
 
+        /// <summary>
+        /// The implementation cannot continue with the processing of the current request due to an unexpected failure - disconnection from a database, for example.
+        /// </summary>
         public static int CANNOT_PROCEED = 500;
 
         protected int code

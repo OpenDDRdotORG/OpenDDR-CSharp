@@ -29,11 +29,22 @@ using System.Reflection;
 
 namespace W3c.Ddr.Simple
 {
+    /// <summary>
+    /// Defines a factory for instantiating Service with the supplied default namespace and configuration.
+    /// </summary>
     public class ServiceFactory
     {
+        
+        //public static IService newService(String clazz, String defaultVocabulary, Properties configuration)
+        /// <summary>
+        /// Instantiates an instance of the Type serviceType establishing the Default Vocabulary to be the one specified and with implementation specific values passed as Properties.
+        /// </summary>
+        /// <param name="serviceType">The interface implementation</param>
+        /// <param name="defaultVocabulary">The default vocabulary</param>
+        /// <param name="configuration">The Property</param>
+        /// <returns>Return the service instance</returns>
         /// <exception cref="InitializationException">Throws when...</exception>
         /// <exception cref="NameException">Throws when...</exception>
-        //public static IService newService(String clazz, String defaultVocabulary, Properties configuration)
         public static IService newService(Type serviceType, String defaultVocabulary, Properties configuration)
         {
 

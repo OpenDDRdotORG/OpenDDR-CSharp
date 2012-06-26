@@ -26,31 +26,52 @@ using System.Text;
 
 namespace W3c.Ddr.Simple
 {
+    /// <summary>
+    /// PropertyValue models a PropertyRef together with its value
+    /// </summary>
+    /// <remarks>
+    /// Values may be empty, in which case the method exists returns false. An attempt to query an empty value causes a ValueException as does an attempt to query a value with an incompatible accessor method (string as float, for example). For the getString method implementations must return an implementation dependent String representation if the type of the value is not natively String. For other methods if the underlying type of the data does not match the method signature then a ValueException must be thrown.
+    /// </remarks>
     public interface IPropertyValue
     {
-        /// <exception cref="ValueException">Throws when...</exception>
+        /// <summary>Value Retrieval</summary>
+        /// <exception cref="ValueException">Throws when query an empty value or attempt to query a value with an incompatible type</exception>
         double GetDouble();
 
-        /// <exception cref="ValueException">Throws when...</exception>
+        /// <summary>Value Retrieval</summary>
+        /// <exception cref="ValueException">Throws when query an empty value or attempt to query a value with an incompatible type</exception>
         long GetLong();
 
-        /// <exception cref="ValueException">Throws when...</exception>
+        /// <summary>Value Retrieval</summary>
+        /// <exception cref="ValueException">Throws when query an empty value or attempt to query a value with an incompatible type</exception>
         bool GetBoolean();
 
-        /// <exception cref="ValueException">Throws when...</exception>
+        /// <summary>Value Retrieval</summary>
+        /// <exception cref="ValueException">Throws when query an empty value or attempt to query a value with an incompatible type</exception>
         int GetInteger();
 
-        /// <exception cref="ValueException">Throws when...</exception>
+        /// <summary>Value Retrieval</summary>
+        /// <exception cref="ValueException">Throws when query an empty value or attempt to query a value with an incompatible type</exception>
         String[] GetEnumeration();
 
-        /// <exception cref="ValueException">Throws when...</exception>
+        /// <summary>Value Retrieval</summary>
+        /// <exception cref="ValueException">Throws when query an empty value or attempt to query a value with an incompatible type</exception>
         float GetFloat();
 
+        /// <summary>
+        /// Property Reference
+        /// </summary>
+        /// <returns>The PropertyRef that this PropertyValue refers to.</returns>
         IPropertyRef PropertyRef();
 
-        /// <exception cref="ValueException">Throws when...</exception>
+        /// <summary>Value Retrieval</summary>
+        /// <exception cref="ValueException">Throws when query an empty value or attempt to query a value with an incompatible type</exception>
         String GetString();
 
+        /// <summary>
+        /// Existence
+        /// </summary>
+        /// <returns>True if a value is available, false otherwise.</returns>
         bool Exists();
     }
 }

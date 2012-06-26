@@ -26,10 +26,21 @@ using System.Text;
 
 namespace W3c.Ddr.Simple
 {
+    /// <summary>
+    /// A set of PropertyValues.
+    /// </summary>
     public interface IPropertyValues
     {
+        /// <summary>
+        /// Get All Properties in the Set
+        /// </summary>
+        /// <returns>Return an array of IPropertyValue</returns>
         IPropertyValue[] GetAll();
 
+        /// <summary>
+        /// Get the Named Property
+        /// </summary>
+        /// <returns>Return the IPropertyValue associated to the requested IPropertyRef </returns>
         /// <exception cref="NameException">Throws when...</exception>
         IPropertyValue GetValue(IPropertyRef pr);
     }

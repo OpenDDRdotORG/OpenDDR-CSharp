@@ -26,8 +26,14 @@ using System.Text;
 
 namespace W3c.Ddr.Exceptions
 {
+    /// <summary>
+    /// This is a subclass of DDRException and represents an error during the initialization phase of the Simple API. It is thrown only by the initialize method of the Service interface and the newService method of the ServiceFactory class.
+    /// </summary>
     public class InitializationException : DDRException
     {
+        /// <summary>
+        /// There was a problem during initialization. Implementations may define specific codes for different kinds of failures during initialization.
+        /// </summary>
         public static int INITIALIZATION_ERROR = 300;
 
         public InitializationException()

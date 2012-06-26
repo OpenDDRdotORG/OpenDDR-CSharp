@@ -26,10 +26,18 @@ using System.Text;
 
 namespace W3c.Ddr.Models
 {
+    /// <summary>
+    /// This Class models a set of properties. 
+    /// </summary>
     public class Properties
     {
         private Dictionary<String, object> list;
         private String filename;
+
+        public Properties()
+        {
+            list = new Dictionary<String, object>();
+        }
 
         public Properties(String file)
         {
@@ -135,8 +143,5 @@ namespace W3c.Ddr.Models
                 }
             }
         }
-
-
     }
-
 }

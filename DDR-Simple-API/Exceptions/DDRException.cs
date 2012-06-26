@@ -26,9 +26,17 @@ using System.Text;
 
 namespace W3c.Ddr.Exceptions
 {
+    /// <summary>
+    /// It is the superclass of all DDR Simple API exceptions other than SystemException.
+    /// Implementations should raise subclasses of DDRException, they should not raise this exception directly.
+    /// </summary>
     public class DDRException : Exception
     {
         public const long serialVersionUID = 2618094065573111548L;
+        /// <summary>
+        /// This code may be used by implementations to create custom error codes. All implementation specific codes must be greater than this value.
+        /// Implementations may define specific codes for different kinds of failures during initialization.
+        /// </summary>
         public static int IMPLEMENTATION_ERROR = 65536;
 
         public int code

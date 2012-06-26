@@ -32,6 +32,9 @@ using Oddr.Documenthandlers;
 
 namespace Oddr
 {
+    /// <summary>
+    /// The ODDRVocabularyService class is used by ODDRService at initialization time in order to parse the vocabularies xml files and to instantiate the vocabularyHolder.
+    /// </summary>
     class ODDRVocabularyService
     {
         public const String DDR_CORE_VOCABULARY_PATH_PROP = "ddr.vocabulary.core.path";
@@ -41,12 +44,17 @@ namespace Oddr
         public const String ODDR_VOCABULARY_STREAM_PROP = "oddr.vocabulary.stream";
         public const String ODDR_LIMITED_VOCABULARY_STREAM_PROP = "oddr.limited.vocabulary.stream";
         public const String ODDR_LIMITED_VOCABULARY_IRI = "limitedVocabulary";
+
         public VocabularyHolder vocabularyHolder
         {
             private set;
             get;
         }
 
+        /// <summary>
+        /// Initialization funcion. It is called by ODDRService at initialization time in order to populate vocabulary holder.
+        /// </summary>
+        /// <param name="props">Properties object holding the configuration properties.</param>
         /// <exception cref="InitializationException">Throws when...</exception>
         public void Initialize(Properties props)
         {
@@ -120,14 +128,17 @@ namespace Oddr
 
             if (oddrLimitedVocabularyStream != null) {
                 vocabularyParser = ParseVocabularyFromStream(ODDR_LIMITED_VOCABULARY_STREAM_PROP, oddrLimitedVocabularyStream);
-
+                vocabulary = vocabularyParser.vocabulary;
+                vocabularies.Add(ODDR_LIMITED_VOCABULARY_IRI, vocabulary);
             } else {
                if (!string.IsNullOrEmpty(oddrLimitedVocabularyPath)) {
                    vocabularyParser = ParseVocabularyFromPath(ODDR_LIMITED_VOCABULARY_PATH_PROP, oddrLimitedVocabularyPath);
+                   vocabulary = vocabularyParser.vocabulary;
+                   vocabularies.Add(ODDR_LIMITED_VOCABULARY_IRI, vocabulary);
                 }
             }
-            vocabulary = vocabularyParser.vocabulary;
-            vocabularies.Add(ODDR_LIMITED_VOCABULARY_IRI, vocabulary);
+            //vocabulary = vocabularyParser.vocabulary;
+            //vocabularies.Add(ODDR_LIMITED_VOCABULARY_IRI, vocabulary);
 
             vocabularyHolder = new VocabularyHolder(vocabularies);
 
@@ -136,6 +147,12 @@ namespace Oddr
 
         }
 
+        /// <summary>
+        /// Parse a vocabulary from a specified path.
+        /// </summary>
+        /// <param name="prop">The property name in Property class identifying the vocabulary to parse.</param>
+        /// <param name="path">The path of the vocabulary to parse.</param>
+        /// <returns>Return a VocabularyParser containing the parsed vocabulary model.</returns>
         /// <exception cref="InitializationException">Throws when...</exception>
         private VocabularyParser ParseVocabularyFromPath(String prop, String path)
         {
@@ -174,6 +191,12 @@ namespace Oddr
             return vocabularyParser;
         }
 
+        /// <summary>
+        /// Parse a vocabulary from a specified input stream.
+        /// </summary>
+        /// <param name="prop">The property name in Property class identifying the vocabulary to parse.</param>
+        /// <param name="inputStream">The input stream of the vocabulary to parse.</param>
+        /// <returns>Return a VocabularyParser containing the parsed vocabulary model.</returns>
         /// <exception cref="InitializationException">Throws when...</exception>
         private VocabularyParser ParseVocabularyFromStream(String prop, Stream inputStream)
         {

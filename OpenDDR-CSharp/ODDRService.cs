@@ -44,6 +44,9 @@ using Oddr.Models.Vocabularies;
 
 namespace Oddr
 {
+    /// <summary>
+    /// ODDR Implementation of IService.
+    /// </summary>
     public class ODDRService : IService
     {
         public const String ASPECT_DEVICE = "device";
@@ -423,7 +426,7 @@ namespace Oddr
         }
 
         /// <summary>
-        /// 
+        /// Initialize method.
         /// </summary>
         /// <param name="defaultVocabularyIRI"></param>
         /// <param name="prprts"></param>

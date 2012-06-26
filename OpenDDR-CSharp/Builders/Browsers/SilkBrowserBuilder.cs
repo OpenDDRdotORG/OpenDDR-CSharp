@@ -12,8 +12,8 @@ namespace Oddr.Builders.Browsers
     {
         private const String VERSION_REGEXP = ".*Version/([0-9\\.]+).*?";
         private const String SILK_VERSION_REGEXP = ".*Silk/([0-9a-z\\.\\-]+)";
-        private Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex silkVersionRegex = new Regex(SILK_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex silkVersionRegex = new Regex(SILK_VERSION_REGEXP, RegexOptions.Compiled);
 
         public override bool CanBuild(UserAgent userAgent)
         {

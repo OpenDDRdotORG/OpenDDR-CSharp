@@ -33,11 +33,11 @@ namespace Oddr.Builders.Browsers
     {
         private const String MSIE_VERSION_REGEXP = ".*MSIE.([0-9\\.b]+).*";
         private const String DOT_NET_CLR_REGEXP = ".*\\.NET.CLR.*";
-        private Regex msieVersionRegex = new Regex(MSIE_VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex dotNetClrRegex = new Regex(DOT_NET_CLR_REGEXP, RegexOptions.Compiled);
+        private static Regex msieVersionRegex = new Regex(MSIE_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex dotNetClrRegex = new Regex(DOT_NET_CLR_REGEXP, RegexOptions.Compiled);
 
         private const string WINDOWS_CE_PHONE = ".*Windows.?(?:(?:CE)|(?:Phone)).*";
-        private Regex windowsCePhoneRegex = new Regex(WINDOWS_CE_PHONE, RegexOptions.Compiled);
+        private static Regex windowsCePhoneRegex = new Regex(WINDOWS_CE_PHONE, RegexOptions.Compiled);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

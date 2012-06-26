@@ -32,7 +32,7 @@ namespace Oddr.Builders.Browsers
     public class SEMCBrowserBuilder : LayoutEngineBrowserBuilder
     {
         private const String VERSION_REGEXP = ".*SEMC?(?:(?:-Browser/)|(?:-BROWSER/)|(?:/NewsReader/)|(?:-Java/))(?:Symbian/)?([0-9\\.RA]+).*?";
-        private Regex versionRegex = new Regex(VERSION_REGEXP);
+        private static Regex versionRegex = new Regex(VERSION_REGEXP);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

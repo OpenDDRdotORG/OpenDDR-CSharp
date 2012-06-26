@@ -32,7 +32,7 @@ namespace Oddr.Builders.Browsers
     public class SafariBrowserBuilder : LayoutEngineBrowserBuilder
     {
         private const String SAFARI_VERSION_REGEXP = ".*Version/([0-9\\.]+).*";
-        private Regex safariVersionRegex = new Regex(SAFARI_VERSION_REGEXP);
+        private static Regex safariVersionRegex = new Regex(SAFARI_VERSION_REGEXP);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

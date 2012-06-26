@@ -36,14 +36,14 @@ namespace Oddr.Builders.Browsers
         private const String VERSION_REGEXP3 = ".*?(?:(?:Obigo[Il]nternetBrowser/)|(?:Obigo Browser )|(?:[Oo]bigo[- ][Bb]rowser/))([0-9A-Zacqv\\.]+).*?";
         private const String VERSION_REGEXP4 = ".*?(?:(?:[Bb]rowser/[Oo]bigo)|(?:OBIGO[/_-])|(?:Obigo[-/ ]))([0-9A-Zacqv\\.]+).*?";
         private const String VERSION_REGEXP5 = ".*?(?:(?:[Tt]eleca Q))([0-9A-Zacqv\\.]+).*?";
-        private Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex versionRegex2 = new Regex(VERSION_REGEXP2, RegexOptions.Compiled);
-        private Regex versionRegex3 = new Regex(VERSION_REGEXP3, RegexOptions.Compiled);
-        private Regex versionRegex4 = new Regex(VERSION_REGEXP4, RegexOptions.Compiled);
-        private Regex versionRegex5 = new Regex(VERSION_REGEXP5, RegexOptions.Compiled);
+        private static Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex versionRegex2 = new Regex(VERSION_REGEXP2, RegexOptions.Compiled);
+        private static Regex versionRegex3 = new Regex(VERSION_REGEXP3, RegexOptions.Compiled);
+        private static Regex versionRegex4 = new Regex(VERSION_REGEXP4, RegexOptions.Compiled);
+        private static Regex versionRegex5 = new Regex(VERSION_REGEXP5, RegexOptions.Compiled);
 
         private const string OBIGO_TELECA_REGEXP = /*"(?i)(.*obigo.*)|(.*teleca.*)"*/"(.*obigo.*)|(.*teleca.*)";
-        private Regex obigoTelecaRegex = new Regex(OBIGO_TELECA_REGEXP, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex obigoTelecaRegex = new Regex(OBIGO_TELECA_REGEXP, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
 
 

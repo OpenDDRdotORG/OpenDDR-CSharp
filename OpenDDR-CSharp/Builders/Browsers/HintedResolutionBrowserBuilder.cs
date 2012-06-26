@@ -36,11 +36,11 @@ namespace Oddr.Builders.Browsers
         private const String RESOLUTION_HINT_WVGA_REGEXP = ".*WVGA.*";
         private const String RESOLUTION_HINT_WXGA_REGEXP = ".*WXGA.*";
         private const String RESOLUTION_HINT_WQVGA_REGEXP = ".*WQVGA.*";
-        private Regex resolutionHintWxHRegex = new Regex(RESOLUTION_HINT_WXH_REGEXP, RegexOptions.Compiled);
-        private Regex resolutionHintFWVGARegex = new Regex(RESOLUTION_HINT_FWVGA_REGEXP, RegexOptions.Compiled);
-        private Regex resolutionHintWVGARegex = new Regex(RESOLUTION_HINT_WVGA_REGEXP, RegexOptions.Compiled);
-        private Regex resolutionHintWXGARegex = new Regex(RESOLUTION_HINT_WXGA_REGEXP, RegexOptions.Compiled);
-        private Regex resolutionHintWQVGARegex = new Regex(RESOLUTION_HINT_WQVGA_REGEXP, RegexOptions.Compiled);
+        private static Regex resolutionHintWxHRegex = new Regex(RESOLUTION_HINT_WXH_REGEXP, RegexOptions.Compiled);
+        private static Regex resolutionHintFWVGARegex = new Regex(RESOLUTION_HINT_FWVGA_REGEXP, RegexOptions.Compiled);
+        private static Regex resolutionHintWVGARegex = new Regex(RESOLUTION_HINT_WVGA_REGEXP, RegexOptions.Compiled);
+        private static Regex resolutionHintWXGARegex = new Regex(RESOLUTION_HINT_WXGA_REGEXP, RegexOptions.Compiled);
+        private static Regex resolutionHintWQVGARegex = new Regex(RESOLUTION_HINT_WQVGA_REGEXP, RegexOptions.Compiled);
 
 
         public BuiltObject Build(UserAgent userAgent, int confidenceTreshold)

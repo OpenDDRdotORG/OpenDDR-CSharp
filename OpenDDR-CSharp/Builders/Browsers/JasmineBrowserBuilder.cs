@@ -32,7 +32,7 @@ namespace Oddr.Builders.Browsers
     public class JasmineBrowserBuilder : LayoutEngineBrowserBuilder
     {
         private const String VERSION_REGEXP = ".*?(?:(?:Jasmine/))([0-9\\.]+).*?";
-        private Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

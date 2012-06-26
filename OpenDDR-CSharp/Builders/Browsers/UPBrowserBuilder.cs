@@ -32,7 +32,7 @@ namespace Oddr.Builders.Browsers
     public class UPBrowserBuilder : LayoutEngineBrowserBuilder
     {
         private const String VERSION_REGEXP = ".*?(?:(?:UP\\.Browser))[/ ]?(?:WAP)?([0-9\\.abcd]+).*?";
-        private Regex versionRegex = new Regex(VERSION_REGEXP);
+        private static Regex versionRegex = new Regex(VERSION_REGEXP);
 
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)

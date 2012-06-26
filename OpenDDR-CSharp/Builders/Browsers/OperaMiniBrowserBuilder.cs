@@ -33,8 +33,8 @@ namespace Oddr.Builders.Browsers
     {
         private const String VERSION_REGEXP = ".*?Opera Mini/(?:att/)?v?((\\d+)\\.(\\d+)(?:\\.(\\d+))?(?:\\.(\\d+))?).*?";
         private const String BUILD_REGEXP = ".*?Opera Mini/(?:att/)?v?.*?/(.*?);.*";
-        private Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex buildRegex = new Regex(BUILD_REGEXP, RegexOptions.Compiled);
+        private static Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex buildRegex = new Regex(BUILD_REGEXP, RegexOptions.Compiled);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

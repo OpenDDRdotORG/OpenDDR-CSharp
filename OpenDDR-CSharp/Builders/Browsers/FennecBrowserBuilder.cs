@@ -33,8 +33,8 @@ namespace Oddr.Builders.Browsers
     {
         private const String FENNEC_VERSION_REGEXP = ".*Fennec/([0-9a-z\\.\\-]+)";
         private const String FIREFOX_VERSION_REGEXP = ".*Firefox.([0-9a-z\\.b]+).*";
-        private Regex fennecVersionRegex = new Regex(FENNEC_VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex firefoxVersionRegex = new Regex(FIREFOX_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex fennecVersionRegex = new Regex(FENNEC_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex firefoxVersionRegex = new Regex(FIREFOX_VERSION_REGEXP, RegexOptions.Compiled);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

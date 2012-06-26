@@ -33,8 +33,8 @@ namespace Oddr.Builders.Browsers
     {
         private const string VERSION_REGEXP = ".*Version/([0-9\\.]+).*?";
         private const string SAFARI_REGEXP = ".*Safari/([0-9\\.]+).*?";
-        private Regex versionRegex = new Regex(VERSION_REGEXP);
-        private Regex safariRegex = new Regex(SAFARI_REGEXP);
+        private static Regex versionRegex = new Regex(VERSION_REGEXP);
+        private static Regex safariRegex = new Regex(SAFARI_REGEXP);
 
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)

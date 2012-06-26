@@ -41,11 +41,11 @@ namespace Oddr.Builders.Browsers
         private const String GECKO_VERSION_REGEXP = ".*Gecko/([0-9\\.]+).*?";
         private const String TRIDENT_VERSION_REGEXP = ".*Trident/([0-9\\.]+).*?";
         private const String KHTML_VERSION_REGEXP = ".*KHTML/([0-9\\.]+).*?";
-        private Regex webkitVersionRegex = new Regex(WEBKIT_VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex prestoVersionRegex = new Regex(PRESTO_VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex geckoVersionRegex = new Regex(GECKO_VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex tridentVersionRegex = new Regex(TRIDENT_VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex khtmlVersionRegex = new Regex(KHTML_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex webkitVersionRegex = new Regex(WEBKIT_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex prestoVersionRegex = new Regex(PRESTO_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex geckoVersionRegex = new Regex(GECKO_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex tridentVersionRegex = new Regex(TRIDENT_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex khtmlVersionRegex = new Regex(KHTML_VERSION_REGEXP, RegexOptions.Compiled);
 
 
         protected override Browser BuildBrowser(UserAgent userAgent, int hintedWidth, int hintedHeight)

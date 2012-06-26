@@ -34,12 +34,12 @@ namespace Oddr.Builders.Browsers
         private const string VERSION_REGEXP = ".*[^MS]IEMobile.([0-9\\.]+).*?";
         private const string MSIE_VERSION_REGEXP = ".*MSIE.([0-9\\.]+).*";
         private const string MSIEMOBILE_VERSION_REGEXP = ".*MSIEMobile.([0-9\\.]+).*";
-        private Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex msieVersionRegex = new Regex(MSIE_VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex msieMobileVersionRegex = new Regex(MSIEMOBILE_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex msieVersionRegex = new Regex(MSIE_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex msieMobileVersionRegex = new Regex(MSIEMOBILE_VERSION_REGEXP, RegexOptions.Compiled);
 
         private const string WINDOWS_CE_PHONE_REGEXP = ".*Windows.?(?:(?:CE)|(?:Phone)).*";
-        private Regex windowsCePhoneRegex = new Regex(WINDOWS_CE_PHONE_REGEXP, RegexOptions.Compiled);
+        private static Regex windowsCePhoneRegex = new Regex(WINDOWS_CE_PHONE_REGEXP, RegexOptions.Compiled);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

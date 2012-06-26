@@ -33,8 +33,8 @@ namespace Oddr.Builders.Browsers
     {
         private const String BLACKBERRY_VERSION_REGEXP = ".*(?:(?:Version)|(?:[Bb]lack.?[Bb]erry.?(?:[0-9a-z]+)))/([0-9\\.]+).*";//"(?:.*?Version.?([0-9\\.]+).*)|(?:.*?[Bb]lack.?[Bb]erry(?:\\d+)/([0-9\\.]+).*)";
         private const String SAFARI_VERSION_REGEXP = ".*Safari/([0-9\\.]+).*";
-        private Regex blackberryVersionRegex = new Regex(BLACKBERRY_VERSION_REGEXP, RegexOptions.Compiled);
-        private Regex safariVersionRegex = new Regex(SAFARI_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex blackberryVersionRegex = new Regex(BLACKBERRY_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex safariVersionRegex = new Regex(SAFARI_VERSION_REGEXP, RegexOptions.Compiled);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

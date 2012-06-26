@@ -32,10 +32,10 @@ namespace Oddr.Builders.Browsers
     public class NetFrontBrowserBuilder : LayoutEngineBrowserBuilder
     {
         private const String VERSION_REGEXP = ".*?(?:(?:Net[Ff]ront)|(?:ACS-NF)|(?:NF-Browser))[/ ]?[/ ]?(?:WAP)?([0-9\\.]+).*?";
-        private Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled);
 
         private const string NETFRONT_REGEXP = /*"(?i).*netfront.*"*/".*netfront.*";
-        private Regex netfrontRegex = new Regex(NETFRONT_REGEXP, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex netfrontRegex = new Regex(NETFRONT_REGEXP, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

@@ -32,10 +32,10 @@ namespace Oddr.Builders.Browsers
     public class OpenWaveBrowserBuilder : LayoutEngineBrowserBuilder
     {
         private const String VERSION_REGEXP = /*"(?i).*openwave[/ ]?([0-9\\.]+).*?"*/".*openwave[/ ]?([0-9\\.]+).*?";
-        private Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex versionRegex = new Regex(VERSION_REGEXP, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private const string OPENWAVE_REGEXP = /*"(?i).*openwave.*"*/".*openwave.*";
-        private Regex openwaveRegex = new Regex(OPENWAVE_REGEXP, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static Regex openwaveRegex = new Regex(OPENWAVE_REGEXP, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

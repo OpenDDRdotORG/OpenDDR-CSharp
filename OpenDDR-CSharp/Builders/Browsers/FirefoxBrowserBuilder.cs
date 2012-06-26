@@ -31,12 +31,12 @@ namespace Oddr.Builders.Browsers
     public class FirefoxBrowserBuilder : LayoutEngineBrowserBuilder
     {
         private const String FIREFOX_VERSION_REGEXP = ".*Firefox.([0-9a-z\\.b]+).*";
-        private Regex firefoxVersionRegex = new Regex(FIREFOX_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex firefoxVersionRegex = new Regex(FIREFOX_VERSION_REGEXP, RegexOptions.Compiled);
 
         private const string GECKO_FIREFOX_REGEXP = ".*Gecko/([0-9]+).*Firefox.*";
         private const string FENNEC_REGEXP = "Fennec";
-        private Regex firefoxRegex = new Regex(GECKO_FIREFOX_REGEXP, RegexOptions.Compiled);
-        private Regex fennecRegex = new Regex(FENNEC_REGEXP, RegexOptions.Compiled);
+        private static Regex firefoxRegex = new Regex(GECKO_FIREFOX_REGEXP, RegexOptions.Compiled);
+        private static Regex fennecRegex = new Regex(FENNEC_REGEXP, RegexOptions.Compiled);
 
         protected override Models.Browsers.Browser BuildBrowser(Models.UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

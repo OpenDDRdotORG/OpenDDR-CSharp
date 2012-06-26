@@ -32,7 +32,7 @@ namespace Oddr.Builders.Browsers
     public class KonquerorBrowserBuilder : LayoutEngineBrowserBuilder
     {
         private const String KONQUEROR_VERSION_REGEXP = ".*Konqueror/([0-9a-z\\.\\-]+).*";
-        private Regex konquerorVersionPattern = new Regex(KONQUEROR_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex konquerorVersionPattern = new Regex(KONQUEROR_VERSION_REGEXP, RegexOptions.Compiled);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {

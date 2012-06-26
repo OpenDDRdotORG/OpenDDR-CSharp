@@ -89,6 +89,7 @@
     <Compile Include="Builders\Browsers\SEMCBrowserBuilder.cs" />
     <Compile Include="Builders\Browsers\SilkBrowserBuilder.cs" />
     <Compile Include="Builders\Browsers\UPBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\WebOsBrowserBuilder.cs" />
     <Compile Include="Builders\Devices\AndroidDeviceBuilder.cs" />
     <Compile Include="Builders\Devices\IDeviceBuilder.cs" />
     <Compile Include="Builders\Devices\IOSDeviceBuilder.cs" />

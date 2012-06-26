@@ -32,6 +32,7 @@ namespace Oddr.Builders.Devices
     public class SymbianDeviceBuilder : OrderedTokenDeviceBuilder
     {
         private Dictionary<String, Device> devices;
+        private Dictionary<String, Object> regexs = new Dictionary<String, Object>();
 
         public SymbianDeviceBuilder()
             : base()
@@ -61,6 +62,8 @@ namespace Oddr.Builders.Devices
             try
             {
                 orderedRules.Add(initProperties[0], deviceID);
+                regexs.Add(initProperties[0] + "_loose", Regex.Replace(initProperties[0], "[ _/-]", ".?"));
+                regexs.Add(initProperties[0] + "_loose_icase_regex", new Regex(/*"(?i).*"*/".?>*" + Regex.Replace(initProperties[0], "[ _/-]", ".?") + ".*"));
             }
             catch (Exception ex)
             {
@@ -115,9 +118,11 @@ namespace Oddr.Builders.Devices
                 int subtract = 0;
                 String currentToken = token;
 
-                String looseToken = Regex.Replace(token, "[ _/-]", ".?");
+                String looseToken = (String)(regexs[token + "_loose"]);
+                //String looseToken = Regex.Replace(token, "[ _/-]", ".?");
 
-                Regex looseRegex = new Regex(".*" + looseToken + ".*");
+                Regex looseRegex = (Regex)(regexs[token + "_loose_icase_regex"]);
+                //Regex looseRegex = new Regex(".*" + looseToken + ".*");
 
                 if (!looseRegex.IsMatch(userAgent.completeUserAgent))
                 {
@@ -137,7 +142,7 @@ namespace Oddr.Builders.Devices
                         currentToken = looseToken;
                     }
 
-                    currentRegex = new Regex(".*Series60.?(\\d+)\\.(\\d+).?" + currentToken + ".*");
+                    currentRegex = new Regex(".?>*Series60.?(\\d+)\\.(\\d+).?" + currentToken + ".*");
                     if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))
                     {
                         if (orderedRules.Contains(originalToken))
@@ -153,7 +158,7 @@ namespace Oddr.Builders.Devices
                         }
                     }
 
-                    currentRegex = new Regex(".*" + currentToken);
+                    currentRegex = new Regex(".?>*" + currentToken);
                     if (userAgent.GetPatternElementsPre() != null && currentRegex.IsMatch(userAgent.GetPatternElementsPre()))
                     {
                         if (orderedRules.Contains(originalToken))
@@ -184,7 +189,7 @@ namespace Oddr.Builders.Devices
                         }
                     }
 
-                    currentRegex = new Regex(".*" + currentToken + ".?;.*");
+                    currentRegex = new Regex(".?>*" + currentToken + ".?;.*");
                     if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))
                     {
                         if (orderedRules.Contains(originalToken))
@@ -207,7 +212,7 @@ namespace Oddr.Builders.Devices
                     }
                     else
                     {
-                        currentRegex = new Regex(".*" + currentToken + ".*");
+                        currentRegex = new Regex(".?>*" + currentToken + ".*");
                     }
 
                     if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))
@@ -264,8 +269,11 @@ namespace Oddr.Builders.Devices
                 int subtract = 0;
                 String currentToken = token;
 
-                String looseToken = Regex.Replace(token, "[ _/-]", ".?");
-                Regex looseRegex = new Regex(".*" + looseToken + ".*");
+                String looseToken = (String)(regexs[token + "_loose"]);
+                //String looseToken = Regex.Replace(token, "[ _/-]", ".?");
+
+                Regex looseRegex = (Regex)(regexs[token + "_loose_icase_regex"]);
+                //Regex looseRegex = new Regex(".*" + looseToken + ".*");
 
                 if (!looseRegex.IsMatch(userAgent.completeUserAgent))
                 {
@@ -281,7 +289,7 @@ namespace Oddr.Builders.Devices
                         currentToken = looseToken;
                     }
 
-                    currentRegex = new Regex(".*" + currentToken + ".*");
+                    currentRegex = new Regex(".?>*" + currentToken + ".*");
                     if (currentRegex.IsMatch(ua))
                     {
                         if (orderedRules.Contains(originalToken))

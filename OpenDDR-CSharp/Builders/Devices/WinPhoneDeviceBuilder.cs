@@ -32,6 +32,7 @@ namespace Oddr.Builders.Devices
     public class WinPhoneDeviceBuilder : OrderedTokenDeviceBuilder
     {
         private Dictionary<String, Device> devices;
+        private Dictionary<String, Object> regexs = new Dictionary<String, Object>();
 
         public WinPhoneDeviceBuilder()
             : base()
@@ -59,6 +60,8 @@ namespace Oddr.Builders.Devices
             try
             {
                 orderedRules.Add(initProperties[0], deviceID);
+                regexs.Add(initProperties[0] + "_loose", Regex.Replace(initProperties[0], "[ _/-]", ".?"));
+                regexs.Add(initProperties[0] + "_loose_icase_regex", new Regex(/*"(?i).*"*/".?>*" + Regex.Replace(initProperties[0], "[ _/-]", ".?") + ".*", RegexOptions.IgnoreCase));
             }
             catch (Exception ex)
             {
@@ -68,7 +71,7 @@ namespace Oddr.Builders.Devices
 
         public override bool CanBuild(UserAgent userAgent)
         {
-            return userAgent.containsWindowsPhone;
+            return userAgent.containsWindowsPhone && (userAgent.mozillaPattern || userAgent.operaPattern);
         }
 
         public override BuiltObject Build(UserAgent userAgent, int confidenceTreshold)
@@ -109,9 +112,11 @@ namespace Oddr.Builders.Devices
                 int subtract = 0;
                 String currentToken = token;
 
-                String looseToken = Regex.Replace(token, "[ _/-]", ".?");
+                String looseToken = (String)(regexs[token + "_loose"]); 
+                //String looseToken = Regex.Replace(token, "[ _/-]", ".?");
 
-                Regex looseRegex = new Regex(/*"(?i).*"*/".*" + looseToken + ".*", RegexOptions.IgnoreCase);
+                Regex looseRegex = (Regex)(regexs[token + "_loose_icase_regex"]);
+                //Regex looseRegex = new Regex(/*"(?i).*"*/".*" + looseToken + ".*", RegexOptions.IgnoreCase);
 
                 if (!looseRegex.IsMatch(userAgent.completeUserAgent))
                 {
@@ -132,7 +137,7 @@ namespace Oddr.Builders.Devices
                         currentToken = looseToken;
                     }
 
-                    currentRegex = new Regex(/*"(?i).*"*/".*" + currentToken, RegexOptions.IgnoreCase);
+                    currentRegex = new Regex(/*"(?i).*"*/".?>*" + currentToken, RegexOptions.IgnoreCase);
                     if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))
                     {
                         String deviceId = (String)orderedRules[token];
@@ -158,7 +163,7 @@ namespace Oddr.Builders.Devices
                         }
                     }
 
-                    currentRegex = new Regex(/*"(?i).*"*/".*" + currentToken + ".?;.*", RegexOptions.IgnoreCase);
+                    currentRegex = new Regex(/*"(?i).*"*/".?>*" + currentToken + ".?;.*", RegexOptions.IgnoreCase);
                     if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))
                     {
                         String deviceId = (String)orderedRules[token];
@@ -179,7 +184,7 @@ namespace Oddr.Builders.Devices
                     }
                     else
                     {
-                        currentRegex = new Regex(/*"(?i).*"*/".*" + currentToken + ".*", RegexOptions.IgnoreCase);
+                        currentRegex = new Regex(/*"(?i).*"*/".?>*" + currentToken + ".*", RegexOptions.IgnoreCase);
                     }
 
                     if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))

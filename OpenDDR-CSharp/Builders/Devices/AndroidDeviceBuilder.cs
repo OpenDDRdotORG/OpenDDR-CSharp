@@ -30,8 +30,9 @@ namespace Oddr.Builders.Devices
 {
     public class AndroidDeviceBuilder : OrderedTokenDeviceBuilder
     {
-        private const String BUILD_HASH_REGEXP = ".*Build/([^ \\)\\(]*).*";
+        private const String BUILD_HASH_REGEXP = ".?>*Build/([^ \\)\\(]*).*";
         private Regex buildHashRegex = new Regex(BUILD_HASH_REGEXP);
+        private Dictionary<String, Object> regexs = new Dictionary<String, Object>();
         private Dictionary<String, Device> devices;
 
         /// <summary>
@@ -57,6 +58,8 @@ namespace Oddr.Builders.Devices
             try
             {
                 orderedRules.Add(initProperties[0], deviceID);
+                regexs.Add(initProperties[0] + "_loose", Regex.Replace(initProperties[0], "[ _/-]", ".?"));
+                regexs.Add(initProperties[0] + "_loose_icase_regex", new Regex(/*"(?i).*"*/".?>*" + Regex.Replace(initProperties[0], "[ _/-]", ".?") + ".*", RegexOptions.IgnoreCase));
             }
             catch (Exception ex)
             {
@@ -66,22 +69,22 @@ namespace Oddr.Builders.Devices
 
         public override bool CanBuild(UserAgent userAgent)
         {
-            return userAgent.containsAndroid;
+            return userAgent.containsAndroid && (userAgent.mozillaPattern || userAgent.operaPattern);
         }
 
         public override BuiltObject Build(UserAgent userAgent, int confidenceTreshold)
         {
             List<Device> foundDevices = new List<Device>();
             ICollection tokens = orderedRules.Keys;
+            string userAgentWithoutAndroid = userAgent.completeUserAgent.Replace("Android", "");
             foreach (string token in tokens)
             {
-                Device d = ElaborateAndroidDeviceWithToken(userAgent, token);
+                Device d = ElaborateAndroidDeviceWithToken(userAgent, token, userAgentWithoutAndroid);
                 if (d != null)
                 {
                     if (d.confidence > confidenceTreshold)
                     {
                         return d;
-
                     }
                     else
                     {
@@ -102,151 +105,149 @@ namespace Oddr.Builders.Devices
             return null;
         }
 
-        private Device ElaborateAndroidDeviceWithToken(UserAgent userAgent, String token)
+        private Device ElaborateAndroidDeviceWithToken(UserAgent userAgent, String token, String userAgentWithoutAndroid)
         {
-            if (userAgent.mozillaPattern || userAgent.operaPattern)
+            int subtract = 0;
+            String currentToken = token;
+
+            String looseToken = (String)(regexs[token + "_loose"]); 
+            //String looseToken = Regex.Replace(token, "[ _/-]", ".?");
+
+            Regex looseRegex = (Regex)(regexs[token + "_loose_icase_regex"]);
+            //Regex looseRegex = new Regex(/*"(?i).*"*/".*" + looseToken + ".*", RegexOptions.IgnoreCase);
+
+            if (!looseRegex.IsMatch(userAgentWithoutAndroid))
             {
-                int subtract = 0;
-                String currentToken = token;
+                return null;
+            }
 
-                String looseToken = Regex.Replace(token, "[ _/-]", ".?");
+            String patternElementInsideClean = CleanPatternElementInside(userAgent.GetPatternElementsInside());
 
-                Regex looseRegex = new Regex(/*"(?i).*"*/".*" + looseToken + ".*", RegexOptions.IgnoreCase);
-                string userAgentWithoutAndroid = userAgent.completeUserAgent.Replace("Android", "");
+            Regex currentRegex = null;
 
-                if (!looseRegex.IsMatch(userAgentWithoutAndroid))
+            for (int i = 0; i <= 1; i++)
+            {
+                if (i == 1)
                 {
-                    return null;
+                    currentToken = looseToken;
                 }
 
-                String patternElementInsideClean = CleanPatternElementInside(userAgent.GetPatternElementsInside());
-
-                Regex currentRegex = null;
-
-                for (int i = 0; i <= 1; i++)
+                currentRegex = new Regex(/*"(?i).*"*/".?>*" + currentToken + ".?Build/.*", RegexOptions.IgnoreCase);
+                if (patternElementInsideClean != null && currentRegex.IsMatch(patternElementInsideClean))
                 {
-                    if (i == 1)
+                    String deviceId = (String)orderedRules[token];
+
+                    Device retDevice = null;
+                    if (devices.TryGetValue(deviceId, out retDevice))
                     {
-                        currentToken = looseToken;
+                        retDevice = (Device)retDevice.Clone();
+                        retDevice.confidence = (100 - subtract);
+                        return retDevice;
                     }
-
-                    currentRegex = new Regex(/*"(?i).*"*/".*" + currentToken + ".?Build/.*", RegexOptions.IgnoreCase);
-                    if (patternElementInsideClean != null && currentRegex.IsMatch(patternElementInsideClean))
-                    {
-                        String deviceId = (String)orderedRules[token];
-
-                        Device retDevice = null;
-                        if (devices.TryGetValue(deviceId, out retDevice))
-                        {
-                            retDevice = (Device)retDevice.Clone();
-                            retDevice.confidence = (100 - subtract);
-                            return retDevice;
-                        }
-                    }
-
-                    currentRegex = new Regex(/*"(?i).*"*/".*" + currentToken, RegexOptions.IgnoreCase);
-                    if (userAgent.GetPatternElementsPre() != null && currentRegex.IsMatch(userAgent.GetPatternElementsPre()))
-                    {
-                        String deviceId = (String)orderedRules[token];
-
-                        Device retDevice = null;
-                        if (devices.TryGetValue(deviceId, out retDevice))
-                        {
-                            retDevice = (Device)retDevice.Clone();
-                            retDevice.confidence = (95 - subtract);
-                            return retDevice;
-                        }
-                    }
-
-                    if (patternElementInsideClean != null && currentRegex.IsMatch(patternElementInsideClean))
-                    {
-                        String deviceId = (String)orderedRules[token];
-
-                        Device retDevice = null;
-                        if (devices.TryGetValue(deviceId, out retDevice))
-                        {
-                            retDevice = (Device)retDevice.Clone();
-                            retDevice.confidence = (90 - subtract);
-                            return retDevice;
-                        }
-                    }
-
-                    currentRegex = new Regex(/*"(?i).*"*/".*" + currentToken + ".?;.*", RegexOptions.IgnoreCase);
-                    if (patternElementInsideClean != null && currentRegex.IsMatch(patternElementInsideClean))
-                    {
-                        String deviceId = (String)orderedRules[token];
-
-                        Device retDevice = null;
-                        if (devices.TryGetValue(deviceId, out retDevice))
-                        {
-                            retDevice = (Device)retDevice.Clone();
-                            retDevice.confidence = (90 - subtract);
-                            return retDevice;
-                        }
-                    }
-
-                    if (i == 1)
-                    {
-                        currentRegex = looseRegex;
-
-                    }
-                    else
-                    {
-                        currentRegex = new Regex(/*"(?i).*"*/".*" + currentToken + ".*", RegexOptions.IgnoreCase);
-                    }
-                    if (patternElementInsideClean != null && currentRegex.IsMatch(patternElementInsideClean))
-                    {
-                        String deviceId = (String)orderedRules[token];
-
-                        Device retDevice = null;
-                        if (devices.TryGetValue(deviceId, out retDevice))
-                        {
-                            retDevice = (Device)retDevice.Clone();
-                            retDevice.confidence = (80 - subtract);
-                            return retDevice;
-                        }
-                    }
-                    if (userAgent.GetPatternElementsPre() != null && currentRegex.IsMatch(userAgent.GetPatternElementsPre()))
-                    {
-                        String deviceId = (String)orderedRules[token];
-
-                        Device retDevice = null;
-                        if (devices.TryGetValue(deviceId, out retDevice))
-                        {
-                            retDevice = (Device)retDevice.Clone();
-                            retDevice.confidence = (80 - subtract);
-                            return retDevice;
-                        }
-                    }
-                    if (userAgent.GetPatternElementsPost() != null && currentRegex.IsMatch(userAgent.GetPatternElementsPost()))
-                    {
-                        String deviceId = (String)orderedRules[token];
-
-                        Device retDevice = null;
-                        if (devices.TryGetValue(deviceId, out retDevice))
-                        {
-                            retDevice = (Device)retDevice.Clone();
-                            retDevice.confidence = (60 - subtract);
-                            return retDevice;
-                        }
-                    }
-                    if (i == 1)
-                    {
-                        if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))
-                        {
-                            String deviceId = (String)orderedRules[token];
-
-                            Device retDevice = null;
-                            if (devices.TryGetValue(deviceId, out retDevice))
-                            {
-                                retDevice = (Device)retDevice.Clone();
-                                retDevice.confidence = (40 - subtract);
-                                return retDevice;
-                            }
-                        }
-                    }
-                    subtract += 20;
                 }
+
+                currentRegex = new Regex(/*"(?i).*"*/".?>*" + currentToken, RegexOptions.IgnoreCase);
+                if (userAgent.GetPatternElementsPre() != null && currentRegex.IsMatch(userAgent.GetPatternElementsPre()))
+                {
+                    String deviceId = (String)orderedRules[token];
+
+                    Device retDevice = null;
+                    if (devices.TryGetValue(deviceId, out retDevice))
+                    {
+                        retDevice = (Device)retDevice.Clone();
+                        retDevice.confidence = (95 - subtract);
+                        return retDevice;
+                    }
+                }
+
+                if (patternElementInsideClean != null && currentRegex.IsMatch(patternElementInsideClean))
+                {
+                    String deviceId = (String)orderedRules[token];
+
+                    Device retDevice = null;
+                    if (devices.TryGetValue(deviceId, out retDevice))
+                    {
+                        retDevice = (Device)retDevice.Clone();
+                        retDevice.confidence = (90 - subtract);
+                        return retDevice;
+                    }
+                }
+
+                currentRegex = new Regex(/*"(?i).*"*/".?>*" + currentToken + ".?;.*", RegexOptions.IgnoreCase);
+                if (patternElementInsideClean != null && currentRegex.IsMatch(patternElementInsideClean))
+                {
+                    String deviceId = (String)orderedRules[token];
+
+                    Device retDevice = null;
+                    if (devices.TryGetValue(deviceId, out retDevice))
+                    {
+                        retDevice = (Device)retDevice.Clone();
+                        retDevice.confidence = (90 - subtract);
+                        return retDevice;
+                    }
+                }
+
+                if (i == 1)
+                {
+                    currentRegex = looseRegex;
+
+                }
+                else
+                {
+                    currentRegex = new Regex(/*"(?i).*"*/".?>*" + currentToken + ".*", RegexOptions.IgnoreCase);
+                }
+                if (patternElementInsideClean != null && currentRegex.IsMatch(patternElementInsideClean))
+                {
+                    String deviceId = (String)orderedRules[token];
+
+                    Device retDevice = null;
+                    if (devices.TryGetValue(deviceId, out retDevice))
+                    {
+                        retDevice = (Device)retDevice.Clone();
+                        retDevice.confidence = (80 - subtract);
+                        return retDevice;
+                    }
+                }
+                if (userAgent.GetPatternElementsPre() != null && currentRegex.IsMatch(userAgent.GetPatternElementsPre()))
+                {
+                    String deviceId = (String)orderedRules[token];
+
+                    Device retDevice = null;
+                    if (devices.TryGetValue(deviceId, out retDevice))
+                    {
+                        retDevice = (Device)retDevice.Clone();
+                        retDevice.confidence = (80 - subtract);
+                        return retDevice;
+                    }
+                }
+                if (userAgent.GetPatternElementsPost() != null && currentRegex.IsMatch(userAgent.GetPatternElementsPost()))
+                {
+                    String deviceId = (String)orderedRules[token];
+
+                    Device retDevice = null;
+                    if (devices.TryGetValue(deviceId, out retDevice))
+                    {
+                        retDevice = (Device)retDevice.Clone();
+                        retDevice.confidence = (60 - subtract);
+                        return retDevice;
+                    }
+                }
+                if (i == 1)
+                {
+                    if (userAgent.GetPatternElementsInside() != null && currentRegex.IsMatch(userAgent.GetPatternElementsInside()))
+                    {
+                        String deviceId = (String)orderedRules[token];
+
+                        Device retDevice = null;
+                        if (devices.TryGetValue(deviceId, out retDevice))
+                        {
+                            retDevice = (Device)retDevice.Clone();
+                            retDevice.confidence = (40 - subtract);
+                            return retDevice;
+                        }
+                    }
+                }
+                subtract += 20;
             }
 
             return null;

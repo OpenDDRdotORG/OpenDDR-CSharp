@@ -34,6 +34,9 @@ namespace Oddr.Builders.Devices
     public class TwoStepDeviceBuilder : OrderedTokenDeviceBuilder
     {
         private Dictionary<String, Device> devices;
+        private Dictionary<String, Object> regexs = new Dictionary<String, Object>();
+        private static readonly Regex litteralRegex = new Regex(".*[a-zA-Z].*", RegexOptions.Compiled);
+        private static readonly Regex betweenTokensRegex = new Regex("[ _/-]?", RegexOptions.Compiled);
 
         /// <summary>
         /// 
@@ -185,6 +188,7 @@ namespace Oddr.Builders.Devices
                 step1Token = new OrderedDictionary();
                 try
                 {
+                    regexs.Add(step1TokenString + "_icase", new Regex(/*"(?i).*"*/".?>*" + step1TokenString + ".*", RegexOptions.IgnoreCase));
                     orderedRules.Add(initProperties[0], step1Token);
                     //Console.WriteLine("initProperties[0] " + initProperties[0] + " step1Token " + step1Token);
                 }
@@ -196,6 +200,9 @@ namespace Oddr.Builders.Devices
             try
             {
                 step1Token.Add(step2TokenString, deviceID);
+                regexs.Add(step2TokenString + "_loose", Regex.Replace(step2TokenString, "[ _/-]", ".?"));
+                regexs.Add(step2TokenString + "_loose_icase", new Regex(/*"(?i).*"*/".?>*" + Regex.Replace(step2TokenString, "[ _/-]", ".?") + ".*", RegexOptions.IgnoreCase));
+                regexs.Add(step2TokenString + "_icase", new Regex(/*"(?i).*"*/".?>*" + step2TokenString + ".*", RegexOptions.IgnoreCase));
                 //Console.WriteLine("step2token " + step2TokenString + " deviceID " + deviceID);
             }
             catch (Exception ex)
@@ -208,7 +215,8 @@ namespace Oddr.Builders.Devices
         {
             foreach (String step1Token in orderedRules.Keys)
             {
-                Regex step1TokenRegex = new Regex(/*"(?i).*"*/".*" + step1Token + ".*", RegexOptions.IgnoreCase);
+                Regex step1TokenRegex = (Regex)(regexs[step1Token + "_icase"]);
+                //Regex step1TokenRegex = new Regex(/*"(?i).*"*/".*" + step1Token + ".*", RegexOptions.IgnoreCase);
                 if (step1TokenRegex.IsMatch(userAgent.completeUserAgent))
                 {
                     return true;
@@ -224,7 +232,7 @@ namespace Oddr.Builders.Devices
             {
                 //Regex step1TokenRegex = new Regex("(?i).*" + step1Token + ".*");
                 //if (step1TokenRegex.IsMatch(userAgent.completeUserAgent))
-                if (Regex.IsMatch(userAgent.completeUserAgent, /*"(?i).*"*/".*" + step1Token + ".*", RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(userAgent.completeUserAgent, /*"(?i).*"*/".?>*" + step1Token + ".*", RegexOptions.IgnoreCase))
                 {
                     OrderedDictionary step1Compliant = (OrderedDictionary)orderedRules[step1Token];
                     foreach (String step2token in step1Compliant.Keys)
@@ -265,9 +273,10 @@ namespace Oddr.Builders.Devices
             int confidence;
 
             String originalToken = step2Token;
-            String looseToken = Regex.Replace(step2Token, "[ _/-]", ".?");
-
-            Regex step2TokenRegex = new Regex(/*"(?i).*"*/".*" + step2Token + ".*", RegexOptions.IgnoreCase);
+            String looseToken = (String)(regexs[step2Token + "_loose"]); 
+            //String looseToken = Regex.Replace(step2Token, "[ _/-]", ".?");
+            Regex step2TokenRegex = (Regex)(regexs[step2Token + "_icase"]);  
+            //Regex step2TokenRegex = new Regex(/*"(?i).*"*/".*" + step2Token + ".*", RegexOptions.IgnoreCase);
             if (step2TokenRegex.IsMatch(userAgent.completeUserAgent))
             {
                 confidence = 100;
@@ -275,7 +284,8 @@ namespace Oddr.Builders.Devices
             }
             else
             {
-                Regex looseTokenRegex = new Regex(/*"(?i).*"*/".*" + looseToken + ".*", RegexOptions.IgnoreCase);
+                Regex looseTokenRegex = (Regex)(regexs[step2Token + "_loose_icase"]);
+                //Regex looseTokenRegex = new Regex(/*"(?i).*"*/".*" + looseToken + ".*", RegexOptions.IgnoreCase);
                 if (looseTokenRegex.IsMatch(userAgent.completeUserAgent))
                 {
                     step2Token = looseToken;
@@ -308,12 +318,11 @@ namespace Oddr.Builders.Devices
                 GroupCollection groups = result.Groups;
                 String betweenTokens = groups[1].Value;
                 String s2 = groups[2].Value;
-                if (s2 != null && (betweenTokens == null || betweenTokens.Length > s2.Length))
+                if (s2 != null && s2.Length != 0 && (betweenTokens == null || betweenTokens.Length > s2.Length))
                 {
                     betweenTokens = s2;
                 }
                 int betweenTokensLength = betweenTokens.Length;
-
                 if (step2Token.Length > 3)
                 {
                     if (betweenTokensLength > maxBigTokensDistance)
@@ -339,12 +348,11 @@ namespace Oddr.Builders.Devices
                     }
                 }
 
-                Regex litteralRegex = new Regex(".*[a-zA-Z].*");
                 if ((betweenTokensLength < maxLittleTokensDistance) || (betweenTokensLength < maxBigTokensDistance && (step2Token.Length < 6 || !litteralRegex.IsMatch(step2Token))))
                 {
                     if (betweenTokensLength <= 1)
                     {
-                        Regex betweenTokensRegex = new Regex("[ _/-]?");
+                        
                         if (!betweenTokensRegex.IsMatch(betweenTokens))
                         {
                             confidence -= 20;
@@ -386,7 +394,14 @@ namespace Oddr.Builders.Devices
     {
         public int Compare(string x, string y)
         {
-            return y.Length - x.Length;
+            if (y.Length == x.Length)
+            {
+                return y.CompareTo(x);
+            }
+            else
+            {
+                return y.Length - x.Length;
+            }
         }
     }
 }

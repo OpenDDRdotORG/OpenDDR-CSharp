@@ -32,11 +32,13 @@ namespace Oddr.Builders.Browsers
     public class OperaBrowserBuilder : LayoutEngineBrowserBuilder
     {
         private const String OPERAMINI_VERSION_REGEXP = "Opera Mobi/(.*)";
-        private Regex operaMiniVersionRegex = new Regex(OPERAMINI_VERSION_REGEXP, RegexOptions.Compiled);
+        private const String OPERA_VERSION_REGEXP = ".* Opera ([0-9\\.]+).*";
+        private static Regex operaMiniVersionRegex = new Regex(OPERAMINI_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex operaVersionRegex = new Regex(OPERA_VERSION_REGEXP, RegexOptions.Compiled);
 
         protected override Browser BuildBrowser(UserAgent userAgent, string layoutEngine, string layoutEngineVersion, int hintedWidth, int hintedHeight)
         {
-            if (!userAgent.operaPattern || userAgent.operaVersion == null || userAgent.operaVersion.Length == 0)
+            if ((!userAgent.operaPattern || userAgent.operaVersion == null || userAgent.operaVersion.Length == 0) && (!operaVersionRegex.IsMatch(userAgent.completeUserAgent)))
             {
                 return null;
             }
@@ -61,8 +63,25 @@ namespace Oddr.Builders.Browsers
                 identified.SetModel("Opera");
             }
 
-            identified.SetVersion(userAgent.operaVersion);
-            String[] version = userAgent.operaVersion.Split(".".ToCharArray());
+            if (userAgent.operaVersion != null)
+            {
+                identified.SetVersion(userAgent.operaVersion);
+            }
+            else
+            {
+                if (operaVersionRegex.IsMatch(userAgent.completeUserAgent))
+                {
+                    Match operaMatcher = operaVersionRegex.Match(userAgent.completeUserAgent);
+                    GroupCollection groups = operaMatcher.Groups;
+
+                    if (groups[1] != null && groups[1].Value.Trim().Length > 0)
+                    {
+                        identified.SetVersion(groups[1].Value);
+                    }
+                }
+            }
+
+            String[] version = identified.GetVersion().Split(".".ToCharArray());
 
             if (version.Length > 0)
             {
@@ -95,22 +114,25 @@ namespace Oddr.Builders.Browsers
                 }
             }
 
-            String[] inside = userAgent.GetPatternElementsInside().Split(";".ToCharArray());
-            foreach (String token in inside)
+            if (userAgent.GetPatternElementsInside() != null)
             {
-                String element = token.Trim();
-
-                if (operaMiniVersionRegex.IsMatch(element))
+                String[] inside = userAgent.GetPatternElementsInside().Split(";".ToCharArray());
+                foreach (String token in inside)
                 {
-                    Match miniMatcher = operaMiniVersionRegex.Match(element);
-                    GroupCollection groups = miniMatcher.Groups;
+                    String element = token.Trim();
 
-                    if (groups[1] != null && groups[1].Value.Trim().Length > 0)
+                    if (operaMiniVersionRegex.IsMatch(element))
                     {
-                        identified.SetReferenceBrowser("Opera Mobi");
-                        identified.SetReferenceBrowserVersion(groups[1].Value);
-                        confidence += 10;
-                        break;
+                        Match miniMatcher = operaMiniVersionRegex.Match(element);
+                        GroupCollection groups = miniMatcher.Groups;
+
+                        if (groups[1] != null && groups[1].Value.Trim().Length > 0)
+                        {
+                            identified.SetReferenceBrowser("Opera Mobi");
+                            identified.SetReferenceBrowserVersion(groups[1].Value);
+                            confidence += 10;
+                            break;
+                        }
                     }
                 }
             }
@@ -124,7 +146,7 @@ namespace Oddr.Builders.Browsers
 
         public override bool CanBuild(UserAgent userAgent)
         {
-            return (userAgent.operaPattern && (!userAgent.completeUserAgent.Contains("Opera Mini")));
+            return ((userAgent.operaPattern || operaVersionRegex.IsMatch(userAgent.completeUserAgent)) && (!userAgent.completeUserAgent.Contains("Opera Mini")));
         }
     }
 }

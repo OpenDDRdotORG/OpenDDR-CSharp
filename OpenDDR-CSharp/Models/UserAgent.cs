@@ -37,8 +37,15 @@ namespace Oddr.Models
         public const int INDEX_MOZILLA_PATTERN_GROUP_POST = 5;
         public const int INDEX_MOZILLA_PATTERN_GROUP_MOZ_VER = 3;
         public const int INDEX_OPERA_OR_MOZILLA = 2;
-        private readonly Regex mozillaPatternCompiled = new Regex(MOZILLA_AND_OPERA_PATTERN, RegexOptions.Compiled);
-        private readonly Regex versionPatternCompiled = new Regex(VERSION_PATTERN, RegexOptions.Compiled);
+        private static Regex mozillaPatternCompiled = new Regex(MOZILLA_AND_OPERA_PATTERN, RegexOptions.Compiled);
+        private static Regex versionPatternCompiled = new Regex(VERSION_PATTERN, RegexOptions.Compiled);
+        private static Regex iPadRegex = new Regex(".*(?!like).iPad.*", RegexOptions.Compiled);
+        private static Regex iPodRegex = new Regex(".*(?!like).iPod.*", RegexOptions.Compiled);
+        private static Regex iPhoneRegex = new Regex(".*(?!like).iPhone.*", RegexOptions.Compiled);
+        private static Regex blackBerryRegex = new Regex(".*[Bb]lack.?[Bb]erry.*|.*RIM.?Tablet.?OS.*", RegexOptions.Compiled);
+        private static Regex symbianRegex = new Regex(".*Symbian.*|.*SymbOS.*|.*Series.?60.*", RegexOptions.Compiled);
+        private static Regex windowsRegex = new Regex(".*Windows.?(?:(?:CE)|(?:Phone)|(?:NT)|(?:Mobile)).*", RegexOptions.Compiled);
+        private static Regex internetExplorerRegex = new Regex(".*MSIE.([0-9\\.b]+).*", RegexOptions.Compiled);
         public String completeUserAgent
         {
             private set;
@@ -169,9 +176,6 @@ namespace Oddr.Models
             else
             {
                 containsAndroid = false;
-                Regex iPadRegex = new Regex(".*(?!like).iPad.*");
-                Regex iPodRegex = new Regex(".*(?!like).iPod.*");
-                Regex iPhoneRegex = new Regex(".*(?!like).iPhone.*");
 
                 if (iPadRegex.IsMatch(userAgent) || iPodRegex.IsMatch(userAgent) || iPhoneRegex.IsMatch(userAgent))
                 {
@@ -181,7 +185,6 @@ namespace Oddr.Models
                 else
                 {
                     containsIOSDevices = false;
-                    Regex blackBerryRegex = new Regex(".*[Bb]lack.?[Bb]erry.*|.*RIM.?Tablet.?OS.*");
                     if (blackBerryRegex.IsMatch(userAgent))
                     {
                         containsBlackBerryOrRim = true;
@@ -190,7 +193,6 @@ namespace Oddr.Models
                     else
                     {
                         containsBlackBerryOrRim = false;
-                        Regex symbianRegex = new Regex(".*Symbian.*|.*SymbOS.*|.*Series.?60.*");
                         if (symbianRegex.IsMatch(userAgent))
                         {
                             containsSymbian = true;
@@ -199,7 +201,6 @@ namespace Oddr.Models
                         else
                         {
                             containsSymbian = false;
-                            Regex windowsRegex = new Regex(".*Windows.?(?:(?:CE)|(?:Phone)|(?:NT)|(?:Mobile)).*");
                             if (windowsRegex.IsMatch(userAgent))
                             {
                                 containsWindowsPhone = true;
@@ -210,7 +211,6 @@ namespace Oddr.Models
                                 containsWindowsPhone = false;
                             }
 
-                            Regex internetExplorerRegex = new Regex(".*MSIE.([0-9\\.b]+).*");
                             if (internetExplorerRegex.IsMatch(userAgent))
                             {
                                 containsMSIE = true;

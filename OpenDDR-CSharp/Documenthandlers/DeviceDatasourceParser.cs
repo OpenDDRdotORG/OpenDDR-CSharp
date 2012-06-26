@@ -241,7 +241,8 @@ namespace Oddr.Documenthandlers
                             //vocabularyHolder.ExistProperty(sp.key, ODDRService.ASPECT_DEVICE, ODDRVocabularyService.ODDR_LIMITED_VOCABULARY_IRI);
                             if (vocabularyHolder.ExistProperty(sp.key, ODDRService.ASPECT_DEVICE, ODDRVocabularyService.ODDR_LIMITED_VOCABULARY_IRI) != null)
                             {
-                                dic.Add(sp.key, sp.value);
+                                //dic.Add(sp.key, sp.value);
+                                dic[sp.key] = sp.value;
                             }
                         }
                         //catch (NameException ex)
@@ -259,7 +260,8 @@ namespace Oddr.Documenthandlers
                 {
                     foreach (StringPair sp in properties)
                     {
-                        dic.Add(sp.key, sp.value);
+                        //dic.Add(sp.key, sp.value);
+                        dic[sp.key] = sp.value;
                     }
                 }
 

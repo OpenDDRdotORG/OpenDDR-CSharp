@@ -26,13 +26,22 @@ using System.Text;
 
 namespace Oddr.Models
 {
+    /// <summary>
+    /// Superclass of identified model object.
+    /// </summary>
     public class BuiltObject
     {
+        /// <summary>
+        /// Confidence of identified model object.
+        /// </summary>
         public int confidence
         {
             set;
             get;
         }
+        /// <summary>
+        /// Dictionary of properties of identified model object.
+        /// </summary>
         public Dictionary<String, String> properties
         {
             protected set;
@@ -56,6 +65,11 @@ namespace Oddr.Models
             this.properties = properties;
         }
 
+        /// <summary>
+        /// Retrieve a property from properties dictionary.
+        /// </summary>
+        /// <param name="property">The name of requested properties.</param>
+        /// <returns>Return the value of requested property.</returns>
         public String Get(String property)
         {
             if (properties.ContainsKey(property))
@@ -65,6 +79,11 @@ namespace Oddr.Models
             return null;
         }
 
+        /// <summary>
+        /// Add a property to properties dictionary.
+        /// </summary>
+        /// <param name="name">The name of the property.</param>
+        /// <param name="value">The value of the property.</param>
         public void PutProperty(String name, String value) {
             this.properties[name] = value;
         }

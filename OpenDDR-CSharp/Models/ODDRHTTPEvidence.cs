@@ -27,14 +27,27 @@ using W3c.Ddr.Simple;
 
 namespace Oddr.Models
 {
+    /// <summary>
+    /// Evidence consisting of HTTP Header name and value pairs.
+    /// </summary>
     public class ODDRHTTPEvidence : IEvidence
     {
+        /// <summary>
+        /// Headers dictionary.
+        /// </summary>
         Dictionary<String, String> headers;
 
+        /// <summary>
+        /// Empty constructor.
+        /// </summary>
         public ODDRHTTPEvidence() {
             headers = new Dictionary<String, String>();
         }
 
+        /// <summary>
+        /// Headers Dictionary parameterizable costructor.
+        /// </summary>
+        /// <param name="map">Headers Dictionary.</param>
         public ODDRHTTPEvidence(Dictionary<String, String> map) {
             headers = new Dictionary<String, String>(map);
         }
@@ -55,11 +68,6 @@ namespace Oddr.Models
             return toRet;
         }
 
-        /**
-         *
-         * @param key case insensitive
-         * @param value case sensitive
-         */
         public virtual void Put(String key, String value)
         {
             headers.Add(key.ToLower(), value);

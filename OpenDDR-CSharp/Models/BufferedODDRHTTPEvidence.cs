@@ -30,8 +30,15 @@ using OSModel = Oddr.Models.OS;
 
 namespace Oddr.Models
 {
+    /// <summary>
+    /// Extends ODDRHTTPEvidence. Contains the reference to identified Bowser, Device and OperatingSystem. 
+    /// It can be used to retrieve back model object in order to get properties directly.
+    /// </summary>
     public class BufferedODDRHTTPEvidence : ODDRHTTPEvidence
     {
+        /// <summary>
+        /// Identified Browser object. Null if not yet identified.
+        /// </summary>
         public Browser browserFound
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
@@ -39,6 +46,10 @@ namespace Oddr.Models
             [MethodImpl(MethodImplOptions.Synchronized)]
             set;
         }
+
+        /// <summary>
+        /// Identified Device object. Null if not yet identified.
+        /// </summary>
         public Device deviceFound
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
@@ -46,6 +57,10 @@ namespace Oddr.Models
             [MethodImpl(MethodImplOptions.Synchronized)]
             set;
         }
+
+        /// <summary>
+        /// Identified OperatingSystem object. Null if not yet identified.
+        /// </summary>
         public OSModel.OperatingSystem osFound
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
@@ -54,6 +69,11 @@ namespace Oddr.Models
             set;
         }
 
+        /// <summary>
+        /// When Evidence change, stored model object are removed in order to allow new identification. 
+        /// </summary>
+        /// <param name="key">Header name</param>
+        /// <param name="value">Header value</param>
         public override void Put(String key, String value) {
             this.osFound = null;
             this.browserFound = null;

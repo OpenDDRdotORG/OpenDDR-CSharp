@@ -26,6 +26,9 @@ using System.Text;
 
 namespace Oddr.Models.OS
 {
+    /// <summary>
+    /// Identified OperatingSystem model object.
+    /// </summary>
     public class OperatingSystem : BuiltObject, IComparable, ICloneable
     {
         public String majorRevision

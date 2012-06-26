@@ -26,6 +26,9 @@ using System.Text;
 
 namespace Oddr.Models.Browsers
 {
+    /// <summary>
+    /// Identified Browser model object.
+    /// </summary>
     public class Browser : BuiltObject, IComparable, ICloneable
     {
         public String majorRevision

@@ -26,6 +26,9 @@ using System.Text;
 
 namespace Oddr.Models.Devices
 {
+    /// <summary>
+    /// Identified Device model object.
+    /// </summary>
     public class Device : BuiltObject, IComparable, ICloneable
     {
         public String id

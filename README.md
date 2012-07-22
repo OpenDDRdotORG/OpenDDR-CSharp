@@ -9,7 +9,7 @@ Below a description of the directory tree:
 * __DDR-Simple-API__: contains the porting of the W3C's Device Description Repository Simple API 
 * __OpenDDR-CSharp__: contains the porting of the Java version of OpenDDR
 * __OpenDDRTest__: contains a simple test project of the C# version of OpenDDR
-* __OpenDDRWebTest__: contains a simple ASP.NETR/C# web application test project
+* __OpenDDRWebTest__: contains a simple ASP.NET/C# web application test project
 
 A basic explanation of the properties in oddr.properties follows. Note that one of the changes in this fork includes the removal of the requirement to edit this file. You can leave this file alone and specify a relative web path to the file when instatiating the Properties class. It will then replace the text placeholder "/FILESYSTEM_PATH_TO_RESOURCES/" with the relative web path for you.
 * __oddr.ua.device.builder.path__: Path of the file that explains how to identify the devices. In this, for each builder, are specified the device IDs that the builder handles and the identification rules

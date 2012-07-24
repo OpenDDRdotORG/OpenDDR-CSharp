@@ -1,9 +1,11 @@
 OpenDDR-ASP.NET
 ==============
 
-This is the ASP.NET/C# fork of the great OpenDDR project. The goal of this fork is to create a version of the core project which adds ASP.NET-specific features and examples written in C#.
+This is the ASP.NET/C# fork of the great OpenDDR project.
 
-It strives to be 100% compatible with the current project and data formats by making only the changes required to add the necessary functionality.
+OpenDDR is an API which allows developers to detect devices like mobile phones and tablets, as well as their capabilities, so that action can be taken according to the device. In my case, I needed to leverage the library to identify website visitors so that a custom experience could be presented, in cases where a truly responsive design was not possible. So I forked the codebase and added features and functionality to support the use of OpenDDR in an ASP.NET web application, as well as a C# web project example of its use.
+
+To summarize, the primary goal of this fork is to create a version of the core OpenDDR project which adds ASP.NET-specific features and examples written in C#. It strives to be 100% compatible with the current project and data formats by making only the changes required to add the missing functionality.
 
 Below a description of the directory tree:
 * __DDR-Simple-API__: contains the porting of the W3C's Device Description Repository Simple API 

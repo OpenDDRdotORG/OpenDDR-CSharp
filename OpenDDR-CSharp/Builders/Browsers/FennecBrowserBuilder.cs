@@ -89,6 +89,43 @@ namespace Oddr.Builders.Browsers
                 }
 
             }
+            else if (firefoxVersionRegex.IsMatch(userAgent.completeUserAgent))
+            {
+                Match firefoxMatcher = firefoxVersionRegex.Match(userAgent.completeUserAgent);
+                GroupCollection groups = firefoxMatcher.Groups;
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
+                {
+                    identified.SetVersion(groups[1].Value);
+
+                    string versionFullString = groups[1].Value;
+                    String[] version = versionFullString.Split(".".ToCharArray());
+
+                    if (version.Length > 0)
+                    {
+                        identified.majorRevision = version[0];
+                        if (identified.majorRevision.Length == 0)
+                        {
+                            identified.majorRevision = "1";
+                        }
+                    }
+
+                    if (version.Length > 1)
+                    {
+                        identified.minorRevision = version[1];
+                        confidence += 10;
+                    }
+
+                    if (version.Length > 2)
+                    {
+                        identified.microRevision = version[2];
+                    }
+
+                    if (version.Length > 3)
+                    {
+                        identified.nanoRevision = version[3];
+                    }
+                }
+            }
             else
             {
                 //fallback version
@@ -128,7 +165,7 @@ namespace Oddr.Builders.Browsers
 
         public override bool CanBuild(UserAgent userAgent)
         {
-            return userAgent.completeUserAgent.Contains("Fennec");
+            return (userAgent.completeUserAgent.Contains("Fennec") || (userAgent.completeUserAgent.Contains("Firefox") && userAgent.completeUserAgent.Contains("Mobile")));
         }
     }
 }

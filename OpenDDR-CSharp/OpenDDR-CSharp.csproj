@@ -67,6 +67,7 @@
     <Compile Include="Builders\Browsers\AndroidMobileBrowserBuilder.cs" />
     <Compile Include="Builders\Browsers\BlackBerryBrowserBuilder.cs" />
     <Compile Include="Builders\Browsers\ChromeBrowserBuilder.cs" />
+    <Compile Include="Builders\Browsers\ChromeMobileBrowserBuilder.cs" />
     <Compile Include="Builders\Browsers\DefaultBrowserBuilder.cs" />
     <Compile Include="Builders\Browsers\DolfinBrowserBuilder.cs" />
     <Compile Include="Builders\Browsers\FennecBrowserBuilder.cs" />

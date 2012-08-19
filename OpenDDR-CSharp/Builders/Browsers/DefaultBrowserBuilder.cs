@@ -40,6 +40,8 @@ namespace Oddr.Builders.Browsers
             builders = new IBuilder[]
             {
                 new OperaMiniBrowserBuilder(),
+                new ChromeMobileBrowserBuilder(),
+                new FennecBrowserBuilder(),
                 new SafariMobileBrowserBuilder(),
                 new SilkBrowserBuilder(),
                 new AndroidMobileBrowserBuilder(),
@@ -55,7 +57,6 @@ namespace Oddr.Builders.Browsers
                 new IEMobileBrowserBuilder(),
                 new NokiaBrowserBuilder(),
                 new BlackBerryBrowserBuilder(),
-                new FennecBrowserBuilder(),
                 new WebOsBrowserBuilder(),
                 new InternetExplorerBrowserBuilder(),
                 new ChromeBrowserBuilder(),

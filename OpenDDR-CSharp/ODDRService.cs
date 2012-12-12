@@ -598,7 +598,7 @@ namespace Oddr
                 }
                 else
                 {
-                    stream = new FileStream(oddrUaDeviceDatasourcePath, FileMode.Open);
+                    stream = new FileStream(oddrUaDeviceDatasourcePath, FileMode.Open, FileAccess.Read);
                 }
 
             }
@@ -669,7 +669,7 @@ namespace Oddr
                 {
                     try
                     {
-                        stream = new FileStream(ooddrUaDeviceDatasourcePatchPathArray[i], FileMode.Open);
+                        stream = new FileStream(ooddrUaDeviceDatasourcePatchPathArray[i], FileMode.Open, FileAccess.Read);
                     }
                     catch (IOException ex)
                     {
@@ -712,7 +712,7 @@ namespace Oddr
                 }
                 else
                 {
-                    stream = new FileStream(oddrUaDeviceBuilderPath, FileMode.Open);
+                    stream = new FileStream(oddrUaDeviceBuilderPath, FileMode.Open, FileAccess.Read);
                 }
 
             }
@@ -781,7 +781,7 @@ namespace Oddr
                 {
                     try
                     {
-                        stream = new FileStream(oddrUaDeviceBuilderPatchPathArray[i], FileMode.Open);
+                        stream = new FileStream(oddrUaDeviceBuilderPatchPathArray[i], FileMode.Open, FileAccess.Read);
 
                     }
                     catch (IOException ex)
@@ -824,7 +824,7 @@ namespace Oddr
                 }
                 else
                 {
-                    stream = new FileStream(oddrUaBrowserDatasourcePaths, FileMode.Open);
+                    stream = new FileStream(oddrUaBrowserDatasourcePaths, FileMode.Open, FileAccess.Read);
                 }
 
             }
@@ -862,7 +862,7 @@ namespace Oddr
                 }
                 else
                 {
-                    stream = new FileStream(oddrUaOperatingSystemDatasourcePaths, FileMode.Open);
+                    stream = new FileStream(oddrUaOperatingSystemDatasourcePaths, FileMode.Open, FileAccess.Read);
                 }
 
             }

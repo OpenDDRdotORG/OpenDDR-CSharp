@@ -45,7 +45,8 @@ namespace Oddr.Models
         private static Regex blackBerryRegex = new Regex(".*[Bb]lack.?[Bb]erry.*|.*RIM.?Tablet.?OS.*", RegexOptions.Compiled);
         private static Regex symbianRegex = new Regex(".*Symbian.*|.*SymbOS.*|.*Series.?60.*", RegexOptions.Compiled);
         private static Regex windowsRegex = new Regex(".*Windows.?(?:(?:CE)|(?:Phone)|(?:NT)|(?:Mobile)).*", RegexOptions.Compiled);
-        private static Regex internetExplorerRegex = new Regex(".*MSIE.([0-9\\.b]+).*", RegexOptions.Compiled);
+        private static Regex internetExplorer10AndLowerRegex = new Regex(".*MSIE.([0-9\\.b]+).*", RegexOptions.Compiled);
+        private static Regex internetExplorer11AndHigherRegex = new Regex(".*Trident.*", RegexOptions.Compiled);
         public String completeUserAgent
         {
             private set;
@@ -211,10 +212,10 @@ namespace Oddr.Models
                                 containsWindowsPhone = false;
                             }
 
-                            if (internetExplorerRegex.IsMatch(userAgent))
+                            if (internetExplorer10AndLowerRegex.IsMatch(userAgent) ||
+                                internetExplorer11AndHigherRegex.IsMatch(userAgent))
                             {
                                 containsMSIE = true;
-
                             }
                             else
                             {

@@ -31,9 +31,11 @@ namespace Oddr.Builders.Browsers
 {
     public class InternetExplorerBrowserBuilder : LayoutEngineBrowserBuilder
     {
-        private const String MSIE_VERSION_REGEXP = ".*MSIE.([0-9\\.b]+).*";
+        private const String MSIE_VERSION_10_AND_LOWER_REGEXP = ".*MSIE.([0-9\\.b]+).*";
+        private const String MSIE_VERSION_11_AND_HIGHER_REGEXP = ".*rv:(\\d+\\.\\d+).*";
         private const String DOT_NET_CLR_REGEXP = ".*\\.NET.CLR.*";
-        private static Regex msieVersionRegex = new Regex(MSIE_VERSION_REGEXP, RegexOptions.Compiled);
+        private static Regex msieVersion10AndLowerRegex = new Regex(MSIE_VERSION_10_AND_LOWER_REGEXP, RegexOptions.Compiled);
+        private static Regex msieVersion11AndHigherRegex = new Regex(MSIE_VERSION_11_AND_HIGHER_REGEXP, RegexOptions.Compiled);
         private static Regex dotNetClrRegex = new Regex(DOT_NET_CLR_REGEXP, RegexOptions.Compiled);
 
         private const string WINDOWS_CE_PHONE = ".*Windows.?(?:(?:CE)|(?:Phone)).*";
@@ -52,9 +54,9 @@ namespace Oddr.Builders.Browsers
             identified.SetVendor("Microsoft");
             identified.SetModel("Internet Explorer");
 
-            if (msieVersionRegex.IsMatch(userAgent.completeUserAgent))
+            if (msieVersion10AndLowerRegex.IsMatch(userAgent.completeUserAgent))
             {
-                Match msieMatcher = msieVersionRegex.Match(userAgent.completeUserAgent);
+                Match msieMatcher = msieVersion10AndLowerRegex.Match(userAgent.completeUserAgent);
                 GroupCollection groups = msieMatcher.Groups;
 
                 if (groups[1] != null && groups[1].Value.Trim().Length > 0)
@@ -80,6 +82,34 @@ namespace Oddr.Builders.Browsers
                     }
                 }
 
+            }
+            else if (msieVersion11AndHigherRegex.IsMatch(userAgent.completeUserAgent))
+            {
+                Match msieMatcher = msieVersion11AndHigherRegex.Match(userAgent.completeUserAgent);
+                GroupCollection groups = msieMatcher.Groups;
+
+                if (groups[1] != null && groups[1].Value.Trim().Length > 0)
+                {
+                    identified.SetVersion(groups[1].Value);
+
+                    string versionFullString = groups[1].Value;
+                    String[] version = versionFullString.Split(".".ToCharArray());
+
+                    if (version.Length > 0)
+                    {
+                        identified.majorRevision = version[0];
+                        if (identified.majorRevision.Length == 0)
+                        {
+                            identified.majorRevision = "1";
+                        }
+                    }
+
+                    if (version.Length > 1)
+                    {
+                        identified.minorRevision = version[1];
+                        confidence += 10;
+                    }
+                }
             }
             else
             {

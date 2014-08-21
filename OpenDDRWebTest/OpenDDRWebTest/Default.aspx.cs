@@ -29,7 +29,16 @@ namespace OpenDDRWebTest
 			IPropertyName modelBrowserPropertyName = null;
 			IPropertyRef modelBrowserRef = null;
 
+			IPropertyName modelBrowserPropertyVer = null;
+			IPropertyRef modelBrowserVer = null;
+
+
 			string userAgent = Request.UserAgent;
+
+			// IE11 user agent that causes a null value for deviceFound
+			// userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; MALC; rv:11.0) like Gecko";
+
+			Output.InnerHtml += "<p>USER AGENT: " + userAgent + "</p>";
 
 			if (Application["oddr"] == null)
 			{
@@ -62,9 +71,15 @@ namespace OpenDDRWebTest
 					Application["modelBrowserPropertyName"] = modelBrowserPropertyName;
 					Application["modelBrowserRef"] = modelBrowserRef;
 
-					propertyRefs = new IPropertyRef[] { vendorDeviceRef, modelDeviceRef, vendorBrowserRef, modelBrowserRef };
+					modelBrowserPropertyVer = openDDRService.NewPropertyName("version", @"http://www.openddr.org/oddr-vocabulary");
+					modelBrowserVer = openDDRService.NewPropertyRef(modelBrowserPropertyVer, "webBrowser");
+					Application["modelBrowserPropertyVer"] = modelBrowserPropertyVer;
+					Application["modelBrowserVer"] = modelBrowserVer;
+
+					propertyRefs = new IPropertyRef[] { vendorDeviceRef, modelDeviceRef, vendorBrowserRef, modelBrowserRef, modelBrowserVer };
 					Application["propertyRefs"] = propertyRefs;
 				}
+
 				catch (Exception exc)
 				{
 					Output.InnerHtml += "<br />ERROR: " + exc.ToString() + "<br />";
@@ -86,6 +101,9 @@ namespace OpenDDRWebTest
 
 				modelBrowserPropertyName = (IPropertyName)Application["modelBrowserPropertyName"];
 				modelBrowserRef = (IPropertyRef)Application["modelBrowserRef"];
+
+				modelBrowserPropertyVer = (IPropertyName)Application["modelBrowserPropertyVer"];
+				modelBrowserVer = (IPropertyRef)Application["modelBrowserVer"];
 
 				propertyRefs = (IPropertyRef[])Application["propertyRefs"];
 			}
@@ -117,14 +135,23 @@ namespace OpenDDRWebTest
 					Output.InnerHtml += "<p>Model: " + propertyValues.GetValue(modelBrowserRef).GetString() + "</p>";
 				}
 
-				Output.InnerHtml += "<p>Dual orientation: " + ((BufferedODDRHTTPEvidence)e).deviceFound.Get("dual_orientation") + "</p>";
+				if (propertyValues.GetValue(modelBrowserVer).Exists())
+				{
+					Output.InnerHtml += "<p>Version: " + propertyValues.GetValue(modelBrowserVer).GetString() + "</p>";
+				}
 
-				Output.InnerHtml += "<p>Tablet: " + ((BufferedODDRHTTPEvidence)e).deviceFound.Get("is_tablet") + "</p>";
+				if (((BufferedODDRHTTPEvidence)e).deviceFound != null)
+				{
+					Output.InnerHtml += "<p>Dual orientation: " + ((BufferedODDRHTTPEvidence)e).deviceFound.Get("dual_orientation") + "</p>";
 
-				Output.InnerHtml += "<p>Wireless device: " + ((BufferedODDRHTTPEvidence)e).deviceFound.Get("is_wireless_device") + "</p>";
+					Output.InnerHtml += "<p>Tablet: " + ((BufferedODDRHTTPEvidence)e).deviceFound.Get("is_tablet") + "</p>";
 
-				Output.InnerHtml += "<p>Mobile browser: " + ((BufferedODDRHTTPEvidence)e).deviceFound.Get("mobile_browser") + "</p>";
+					Output.InnerHtml += "<p>Wireless device: " + ((BufferedODDRHTTPEvidence)e).deviceFound.Get("is_wireless_device") + "</p>";
+
+					Output.InnerHtml += "<p>Mobile browser: " + ((BufferedODDRHTTPEvidence)e).deviceFound.Get("mobile_browser") + "</p>";
+				}
 			}
+
 			catch (Exception exc)
 			{
 				Output.InnerHtml += "<br />ERROR2: " + exc.ToString() + "<br />";

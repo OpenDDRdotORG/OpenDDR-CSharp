@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ODDR>
+    <version>
+        <ver>1.27</ver>
+        <last_updated>2014-03-28 09:31:00</last_updated>
+        <official_url>openddr.org</official_url>
+        <maintainers>
+        </maintainers>
+        <authors>
+        </authors>
+        <statement>
+		     <![CDATA[
+				Copyright 2011 OpenDDR LLC
+		This file is made available under the terms of the Open Database License: http://opendatacommons.org/licenses/odbl/1.0/.
+		Any rights in individual contents of the database are licensed under the Database Contents License: http://opendatacommons.org/licenses/dbcl/1.0/
+		]]>
+        </statement>
+    </version>
+    <!-- ODDR Vocabulary description -->
+    <VocabularyDescription target="http://www.openddr.org/oddr-vocabulary">
+	<!-- Aspects -->
+        <Aspects>
+            <Aspect name="device"/>
+            <Aspect name="webBrowser"/>
+            <Aspect name="operativeSystem"/>
+<!--            <Aspect name="group"/>-->
+        </Aspects>
+<!--        <Variables>
+            <Variable id="a" vocabulary="http://www.openddr.org/oddr-vocabulary" name="model" aspect="device" />
+            <Variable id="b" vocabulary="http://www.openddr.org/oddr-vocabulary" name="vendor" aspect="device" />
+            <Variable id="c" vocabulary="http://www.openddr.org/oddr-vocabulary" name="model" aspect="webBrowser" />
+            <Variable id="d" vocabulary="http://www.openddr.org/oddr-vocabulary" name="notApple" aspect="group" />
+        </Variables>-->
+	<!-- Properties -->
+        <Properties>
+		<!-- Core Property -->
+<!--            <Property name="notApple" datatype="xs:string" aspects="group" defaultAspect="group" expr="$a != 'iPhone'"/>
+            <Property name="isApple" datatype="xs:string" aspects="group" defaultAspect="group" expr="($a == 'iPhone' || $a == 'iPad' || $a == 'iPod touch') and $d == 'true'"/>
+            <Property name="isApple" datatype="xs:string" aspects="group" defaultAspect="group" expr="$a == 'iPhone' || $a == 'iPad' || $a == 'iPod touch'"/>
+            <Property name="webkitUiSupport" datatype="xs:string" aspects="group" defaultAspect="group" expr="$b == 'Apple' || $c == 'Android Browser'"/>-->
+            <Property name="id" datatype="xs:string" aspects="device" defaultAspect="device"/>
+            <Property name="vendor" datatype="xs:string" aspects="device, webBrowser, operativeSystem" defaultAspect="device"/>
+            <Property name="model" datatype="xs:string" aspects="device, webBrowser,  operativeSystem" defaultAspect="device"/>
+            <Property name="displayWidth" datatype="xs:nonNegativeInteger" aspects="device, webBrowser" defaultAspect="device"/>
+            <Property name="displayHeight" datatype="xs:nonNegativeInteger" aspects="device, webBrowser" defaultAspect="device"/>
+            <Property name="version" datatype="xs:string" aspects="device, webBrowser, operativeSystem" defaultAspect="device"/>
+            <Property name="inputDevices" datatype="xs:enumeration" aspects="device" defaultAspect="device"/>
+            <Property name="cookieSupport" datatype="xs:boolean" aspects="webBrowser" defaultAspect="webBrowser"/>
+            <Property name="imageFormatSupport" datatype="xs:enumeration" aspects="webBrowser" defaultAspect="webBrowser"/>
+            <Property name="inputModeSupport" datatype="xs:enumeration" aspects="webBrowser" defaultAspect="webBrowser"/>
+            <Property name="stylesheetSupport" datatype="xs:enumeration" aspects="webBrowser" defaultAspect="webBrowser"/>
+            <Property name="markupSupport" datatype="xs:enumeration" aspects="webBrowser" defaultAspect="webBrowser"/>
+            <Property name="scriptSupport" datatype="xs:enumeration" aspects="webBrowser" defaultAspect="webBrowser"/>
+		<!-- ODDR property -->	
+            <Property aspects="device" datatype="xs:string" defaultAspect="device" name="mobile_browser"/>
+            <Property aspects="device" datatype="xs:string" defaultAspect="device" name="device_os"/>
+            <Property aspects="device" datatype="xs:integer" defaultAspect="device" name="nokia_series"/>
+            <Property aspects="device" datatype="xs:string" defaultAspect="device" name="mobile_browser_version"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="is_tablet"/>
+            <Property aspects="device" datatype="xs:integer" defaultAspect="device" name="nokia_edition"/>
+            <Property aspects="device" datatype="xs:string" defaultAspect="device" name="device_os_version"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="is_wireless_device"/>
+            <Property aspects="device" datatype="xs:string" defaultAspect="device" name="marketing_name"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="xhtml_format_as_attribute"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="xhtml_format_as_css_property"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="ajax_support_getelementbyid"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="ajax_support_event_listener"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="ajax_manipulate_dom"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="ajax_support_javascript"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="ajax_support_inner_html"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="ajax_manipulate_css"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="ajax_support_events"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="dual_orientation"/>
+            <Property aspects="device" datatype="xs:boolean" defaultAspect="device" name="image_inlining"/>
+            <Property aspects="device" datatype="xs:string" defaultAspect="device" name="from"/>
+        </Properties>
+    </VocabularyDescription>
+</ODDR>

@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace W3c.Ddr.Models
 {
@@ -41,8 +42,13 @@ namespace W3c.Ddr.Models
 
         public Properties(String file)
         {
-            Reload(file);
+            Reload(file, "");
         }
+
+		public Properties(String oddrPropertiesFilename, String relativeWebPath)
+		{
+			ReloadWeb(oddrPropertiesFilename, relativeWebPath);
+		}
 
         public String GetProperty(String field, String defValue)
         {
@@ -52,6 +58,7 @@ namespace W3c.Ddr.Models
         public String GetProperty(String field)
         {
             object oval = null;
+
             if (list.TryGetValue(field, out oval))
             {
                 return oval as string;
@@ -100,21 +107,38 @@ namespace W3c.Ddr.Models
 
         public void Reload()
         {
-            Reload(this.filename);
+            Reload(this.filename, "");
         }
 
-        public void Reload(String filename)
+		public void ReloadWeb(String oddrPropertiesFilename, String relativeWebPath)
+		{
+			if (!relativeWebPath.EndsWith("/"))
+			{
+				relativeWebPath += "/";
+			}
+
+			if (oddrPropertiesFilename.StartsWith("/"))
+			{
+				oddrPropertiesFilename = oddrPropertiesFilename.TrimStart('/');
+			}
+
+			oddrPropertiesFilename = HttpContext.Current.Server.MapPath(relativeWebPath + oddrPropertiesFilename);
+
+			Reload(oddrPropertiesFilename, relativeWebPath);
+		}
+
+		public void Reload(String filename, String relativeWebPath)
         {
             this.filename = filename;
             list = new Dictionary<String, object>();
 
             if (System.IO.File.Exists(filename))
-                LoadFromFile(filename);
+				LoadFromFile(filename, relativeWebPath);
             else
                 System.IO.File.Create(filename);
         }
 
-        private void LoadFromFile(String file)
+        private void LoadFromFile(String file, String relativeWebPath)
         {
             foreach (String line in System.IO.File.ReadAllLines(file))
             {
@@ -136,6 +160,20 @@ namespace W3c.Ddr.Models
 
                     try
                     {
+						if (!String.IsNullOrEmpty(relativeWebPath))
+						{
+							if (!relativeWebPath.EndsWith("/"))
+							{
+								relativeWebPath += "/";
+							}
+
+							if (value.Contains("/FILESYSTEM_PATH_TO_RESOURCES/"))
+							{
+								value = value.Replace("/FILESYSTEM_PATH_TO_RESOURCES/", relativeWebPath);
+								value = HttpContext.Current.Server.MapPath(value);
+							}
+						}
+
                         //ignore dublicates
                         list.Add(key, value);
                     }

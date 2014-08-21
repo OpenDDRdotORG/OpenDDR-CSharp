@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDDR-CSharp", "OpenDDR-CSharp\OpenDDR-CSharp.csproj", "{67A3A231-64F0-49F2-BD02-316995E7A737}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F802E34F-10F1-4334-9099-3F1579DC4F06} = {F802E34F-10F1-4334-9099-3F1579DC4F06}
@@ -9,6 +9,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDR-Simple-API", "DDR-Simple-API\DDR-Simple-API.csproj", "{F802E34F-10F1-4334-9099-3F1579DC4F06}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDDRTest", "OpenDDRTest\OpenDDRTest.csproj", "{C1ECDE8F-0B77-422D-B4B6-0CF2239C7FA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDDRWebTest", "OpenDDRWebTest\OpenDDRWebTest\OpenDDRWebTest.csproj", "{AFBB0ACD-D9D9-4EED-8DBC-4E5A0EA7EDBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,16 @@ Global
 		{C1ECDE8F-0B77-422D-B4B6-0CF2239C7FA2}.Release|Mixed Platforms.Build.0 = Release|x86
 		{C1ECDE8F-0B77-422D-B4B6-0CF2239C7FA2}.Release|x86.ActiveCfg = Release|x86
 		{C1ECDE8F-0B77-422D-B4B6-0CF2239C7FA2}.Release|x86.Build.0 = Release|x86
+		{AFBB0ACD-D9D9-4EED-8DBC-4E5A0EA7EDBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFBB0ACD-D9D9-4EED-8DBC-4E5A0EA7EDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFBB0ACD-D9D9-4EED-8DBC-4E5A0EA7EDBD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AFBB0ACD-D9D9-4EED-8DBC-4E5A0EA7EDBD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AFBB0ACD-D9D9-4EED-8DBC-4E5A0EA7EDBD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AFBB0ACD-D9D9-4EED-8DBC-4E5A0EA7EDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFBB0ACD-D9D9-4EED-8DBC-4E5A0EA7EDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFBB0ACD-D9D9-4EED-8DBC-4E5A0EA7EDBD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AFBB0ACD-D9D9-4EED-8DBC-4E5A0EA7EDBD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AFBB0ACD-D9D9-4EED-8DBC-4E5A0EA7EDBD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

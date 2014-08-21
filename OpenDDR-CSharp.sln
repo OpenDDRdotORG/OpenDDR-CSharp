@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDDR-CSharp", "OpenDDR-CSharp\OpenDDR-CSharp.csproj", "{67A3A231-64F0-49F2-BD02-316995E7A737}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F802E34F-10F1-4334-9099-3F1579DC4F06} = {F802E34F-10F1-4334-9099-3F1579DC4F06}
